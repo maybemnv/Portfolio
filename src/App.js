@@ -5,7 +5,7 @@ function App() {
     {
       name: "Synthex",
       timeline: "05/2025 - 05/2025",
-      description: "AI coding assistant focused on dev productivity using FastAPI, Streamlit & LLMs",
+      description: " Designed an AI assistant with prompt engineering logic to break down code for educational use cases. Focused on user-centric design, tested prompts using structured success metrics, and deployed using FastAPI and Streamlit.",
       github: "https://github.com/maybemnv/Synthex"
     },
     {
@@ -17,9 +17,15 @@ function App() {
     {
       name: "AI-Driven YouTube Summarizer",
       timeline: "02/2025 - 02/2025",
-      description: "YouTube video summarizer with Gemini AI that creates summaries and quizzes",
+      description: "Developed a summarization tool leveraging Google Gemini AI, with use-case testing across diverse video categories. Prioritized user comprehension and output quality using data-driven evaluations.",
       github: "https://github.com/maybemnv/AI-Powered-YouTube-Video-Summarizer-Quiz-Generator"
-    }
+    },
+    {
+      name:"APS-Failure Model",
+      timeline:"11/2024 - 12/2024",
+      description: "Built a predictive failure detection model for commercial vehicle air pressure systems, enabling early intervention and minimizing operational risk.Applied classification models using scikit-learn and Python, and interpreted outputs using statistical methods",
+      github: "https://github.com/maybemnv/predictive-maintenance-for-air-pressure-system-aps"
+       }
   ];
 
   const skills = {
@@ -35,13 +41,13 @@ function App() {
     Frameworks: [
       { name: "FastAPI", color: "bg-green-800", icon: <img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" className="w-6 h-6" /> },
       { name: "Streamlit", color: "bg-green-800", icon: <img src="https://streamlit.io/images/brand/streamlit-mark-color.svg" alt="Streamlit" className="w-6 h-6" /> },
-      { name: "Flask", color: "bg-green-800", icon: <img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-icon.svg" alt="Flask" className="w-6 h-6" /> },
+      { name: "Flask", color: "bg-green-800", icon: <img src="https://www.svgrepo.com/show/508915/flask.svg" alt="Flask" className="w-6 h-6" /> },
       { name: "NLTK", color: "bg-green-800", icon: <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="NLP" className="w-6 h-6" /> },
       { name: "TensorFlow", color: "bg-green-800", icon: <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="TensorFlow" className="w-6 h-6" /> },
       { name: "PyTorch", color: "bg-green-800", icon: <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg" alt="PyTorch" className="w-6 h-6" /> },
       { name: "SQLAlchemy", color: "bg-green-800", icon: <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlalchemy/sqlalchemy-original.svg" alt="SQLAlchemy" className="w-6 h-6" /> },
       { name: "Docker", color: "bg-green-800", icon: <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" className="w-6 h-6" /> },
-      { name: "Git", color: "bg-green-800", icon: <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" className="w-6 h-6" /> },
+      { name: "Git", color: "bg-green-800", icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-6 h-6" /> },
     ],
     Databases: [
       { name: "MySQL", color: "bg-red-900", icon: <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="MySQL" className="w-6 h-6" /> },
@@ -55,7 +61,7 @@ function App() {
       { name: "Jupyter Notebook", color: "bg-purple-900", icon: <img src="https://www.vectorlogo.zone/logos/jupyter/jupyter-icon.svg" alt="Jupyter Notebook" className="w-6 h-6" /> },
       { name: "Google Colab", color: "bg-purple-900", icon: <img src="https://colab.research.google.com/img/colab_favicon_256px.png" alt="Google Colab" className="w-6 h-6" /> },
       { name: "Postman", color: "bg-purple-900", icon: <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="Postman" className="w-6 h-6" /> },
-      { name: "GitHub", color: "bg-purple-900", icon: <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" className="w-6 h-6" /> }
+      { name: "Power BI", color: "bg-purple-900", icon: <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="PowerBI" className="w-6 h-6" /> }
     ]
   };
 
@@ -82,15 +88,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-inter">
+    <div className="min-h-screen smooth-bg text-white font-inter">
       {/* Background with subtle overlay */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa')`,
-        }}
       />
-      <div className="fixed inset-0 bg-black opacity-80" />
+      <div className="fixed inset-0 bg-overlay opacity-80" />
       
       <div className="relative z-10 flex min-h-screen">
         {/* Left Panel - About Section */}
@@ -111,8 +114,8 @@ function App() {
                   <span>Delhi, India</span>
                 </div>
                 
-                {/* Social Links */}
-                <div className="flex space-x-4">
+                {/* Social Links + Resume */}
+                <div className="flex space-x-4 items-center flex-wrap">
                   {/* Email */}
                   <a 
                     href="mailto:manavkauahal99@gmail.com" 
@@ -124,7 +127,6 @@ function App() {
                       className="w-6 h-6" 
                     />
                   </a>
-
                   {/* GitHub */}
                   <a 
                     href="https://github.com/maybemnv" 
@@ -133,12 +135,11 @@ function App() {
                     className="hover:opacity-80 transition-opacity duration-300"
                   >
                     <img 
-                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" // Dark GitHub icon
+                      src="https://www.svgrepo.com/show/439171/github.svg"
                       alt="GitHub" 
                       className="w-6 h-6" 
                     />
                   </a>
-
                   {/* LinkedIn */}
                   <a 
                     href="https://www.linkedin.com/in/maybmnv/" 
@@ -152,7 +153,6 @@ function App() {
                       className="w-6 h-6" 
                     />
                   </a>
-
                   {/* Discord */}
                   <a 
                     href="https://discord.com/users/751306489574195230" 
@@ -166,43 +166,44 @@ function App() {
                       className="w-6 h-6" 
                     />
                   </a>
+                  {/* Resume Download Button */}
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="ml-2 px-3 py-1 border border-blue-400 text-blue-400 rounded-full text-xs font-medium hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                  >
+                    <svg 
+                      className="w-4 h-4 mr-1 inline-block align-text-bottom" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                      />
+                    </svg>
+                    Resume
+                  </a>
                 </div>
               </div>
 
-              {/* About Section */}
-              <div>
-                <h2 className="text-2xl font-light mb-4 tracking-wide">About</h2>
-                <p className="text-gray-300 leading-relaxed text-base">
-                  I'm a Engineering student specializing in Data Science, with a strong interest in AI/ML, 
-                  software development, and problem solving. I love building AI tools, experimenting with ML models, 
-                  and writing clean code.
-                </p>
-                <p className="text-gray-300 leading-relaxed text-base mt-4">
-                  I've worked on multiple hands-on projects through hackathons and self-learning, 
-                  and I'm always curious, always building.
-                </p>
-
-                {/* Resume Download Button */}
-                <a
-                  href="/resume.pdf"
-                  download
-                  className="inline-flex items-center px-4 py-2 mt-6 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-                >
-                  <svg 
-                    className="w-5 h-5 mr-2" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
-                    />
-                  </svg>
-                  Download Resume
-                </a>
+              {/* About Section - Side by Side */}
+              <div className="flex flex-col md:flex-row gap-4 mt-6">
+                <div className="flex-1">
+                  <h2 className="text-2xl font-light mb-4 tracking-wide">About</h2>
+                  <p className="text-gray-300 leading-relaxed text-base">
+                    I'm an engineering student diving deep into Data Science, but my brain's wired for AI/ML, building stuff, and chasing wild ideas. I don't just code for the sake of it  I build things that make people go, "wait… that actually works?"
+                  </p>
+                  <p className="text-gray-300 leading-relaxed text-base mt-4">
+                    Whether I'm prototyping a GenAI tool, tweaking a model just to see what it does, or writing code that feels right  I'm in my zone when I'm creating. Most of what I know didn't come from lectures — it came from late-night builds, hackathons, self-taught chaos, and being endlessly curious.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed text-base mt-4">
+                    I don't wait for the perfect moment. I ship. I break things. I learn. I repeat.
+                  </p>
+                </div>
               </div>
             </div>
           </LaunchSection>
@@ -296,13 +297,11 @@ function App() {
             <section className="pb-16">
               <h2 className="text-3xl font-light mb-8 tracking-wide">Education</h2>
               <div className="space-y-6">
-                <div className="border-l-2 border-gray-800 pl-6">
-                  <h3 className="text-xl font-medium">Jagannath Institute of Management and Science</h3>
-                  <p className="text-gray-400 mb-2">BCA in Data Science (2022 – 2025)</p>
-                </div>
-                <div className="border-l-2 border-gray-800 pl-6">
-                  <h3 className="text-xl font-medium">Higher Secondary</h3>
-                  <p className="text-gray-400">2021 – 2022</p>
+                <div className="border-l-2 border-gray-800 pl-6 flex items-center">
+                  <div>
+                    <h3 className="text-xl font-medium">Jagannath Institute of Management and Science</h3>
+                    <p className="text-gray-400 mb-2">BCA in Data Science (2022 – 2025)</p>
+                  </div>
                 </div>
               </div>
             </section>

@@ -63,29 +63,80 @@ html {
   }
 }
 
-/* Background overlay for better text readability */
+/* VS Code-style black gradient background */
+.smooth-bg {
+  background: linear-gradient(120deg, #181a20 0%, #23272f 100%);
+}
+
+/* Smoother overlay for better readability */
 .bg-overlay {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
+  background: linear-gradient(135deg, rgba(24,26,32,0.95) 0%, rgba(35,39,47,0.85) 50%, rgba(24,26,32,0.95) 100%);
 }
 
-/* Enhance card hover effects */
-.project-card:hover {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  transition: all 0.3s ease;
+/* Card and button hover/shine effects */
+.project-card, .border-l-2, .rounded-full, .inline-flex {
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+.project-card:hover, .border-l-2:hover, .rounded-full:hover, .inline-flex:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.25);
 }
 
-/* Skill tag animations */
+/* Shine animation for buttons */
+@keyframes shine {
+  0% { background-position: -100px; }
+  100% { background-position: 200px; }
+}
+.btn-shine {
+  background: linear-gradient(90deg, #23272f 0%, #23272f 40%, #444857 50%, #23272f 60%, #23272f 100%);
+  background-size: 200px 100%;
+  animation: shine 1.5s linear infinite;
+}
+
+/* Skill tag scale and shadow on hover */
 .skill-tag {
-  transition: all 0.3s ease;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.skill-tag:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
 
-.skill-tag:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+/* Responsive main layout for mobile */
+@media (max-width: 1024px) {
+  .lg\:fixed {
+    position: static !important;
+  }
+  .lg\:w-1\/2 {
+    width: 100% !important;
+  }
+  .lg\:ml-auto {
+    margin-left: 0 !important;
+  }
+  .lg\:h-screen {
+    height: auto !important;
+  }
+  .lg\:p-16 {
+    padding: 2rem !important;
+  }
+  .flex {
+    flex-direction: column !important;
+  }
+  .space-y-16 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .p-8 {
+    padding: 1rem !important;
+  }
+  .lg\:p-16 {
+    padding: 1rem !important;
+  }
+  .max-w-md {
+    max-width: 100% !important;
+  }
 }
