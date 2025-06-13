@@ -168,7 +168,7 @@ function App() {
                   </a>
                   {/* Resume Download Button */}
                   <a
-                    href="/resume.pdf"
+                    href="/Resume.pdf"
                     download
                     className="ml-2 px-3 py-1 border border-blue-400 text-blue-400 rounded-full text-xs font-medium hover:bg-blue-600 hover:text-white transition-colors duration-300"
                   >
