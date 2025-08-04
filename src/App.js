@@ -277,17 +277,21 @@ function App() {
               <h2 className="text-3xl font-light mb-8 tracking-wide">Experience</h2>
               <div className="border-l-2 border-gray-800 pl-6">
                 <div className="flex items-center mb-4">
-                  <div className="text-6xl mr-4">🚫</div>
+                  <div className="text-6xl mr-4">
+  <a href="https://gvf.co.in/wp-content/uploads/2023/10/logo-2-1-1.png" target="_blank" rel="noopener noreferrer">
+    <img
+      src="https://gvf.co.in/wp-content/uploads/2023/10/logo-2-1-1.png"
+      alt="GVF Logo"
+      className="h-12 w-auto"
+    />
+  </a>
+</div>
+
                   <div>
-                    <h3 className="text-xl font-medium">Error 404: Not Found</h3>
-                    <p className="text-gray-400">Industry Experience</p>
+                    <h3 className="text-xl font-medium">Research Intern at GVF</h3>
+                    <p className="text-gray-400 mb-2">08/2024 – 11/2024</p>
                   </div>
                 </div>
-                <p className="text-gray-300 leading-relaxed">
-                  That's right – I don't have industry experience yet.<br/>
-                  But I bring over 3 years of hands-on coding and software development experience 
-                  through self-driven learning and real-world projects.
-                </p>
               </div>
             </section>
           </LaunchSection>
