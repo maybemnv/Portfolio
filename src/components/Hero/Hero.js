@@ -9,6 +9,11 @@ const Hero = () => {
     <section className="hero-section">
       <div className="hero-content">
         <div className="hero-text">
+          <div className="status-badge">
+            <span className="status-dot"></span>
+            SYSTEM_ONLINE
+          </div>
+          
           <h1 className="glitch-text" data-text={personalInfo.name}>
             {personalInfo.name}
           </h1>
@@ -30,15 +35,23 @@ const Hero = () => {
         </div>
 
         <div className="hero-visual">
-          <div className="dither-box">
-            <div className="code-stream">
-              {Array(20).fill(0).map((_, i) => (
-                <div key={i} className="code-line" style={{ animationDelay: `${i * 0.1}s` }}>
-                  {`> analyzing_data_stream_${Math.floor(Math.random() * 9999)}`}
-                </div>
+          <div className="neural-box sharp-box">
+            <div className="neural-grid">
+              {/* Simulated Nodes */}
+              {[...Array(12)].map((_, i) => (
+                <div key={i} className="node" style={{ 
+                  left: `${Math.random() * 80 + 10}%`, 
+                  top: `${Math.random() * 80 + 10}%`,
+                  animationDelay: `${Math.random() * 2}s`
+                }}></div>
               ))}
+              {/* Simulated Connections (SVG lines could go here, using CSS lines for simplicity) */}
+              <div className="scan-line"></div>
             </div>
-            <div className="dither-overlay"></div>
+            <div className="neural-overlay">
+              <span>NEURAL_NET_V1.0</span>
+              <span>TRAINING...</span>
+            </div>
           </div>
         </div>
       </div>

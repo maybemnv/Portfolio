@@ -1,5 +1,5 @@
 .socials-section {
-  padding: 2rem 0;
+  padding: 0 0 3rem 0; /* Removed top padding to pull closer to Hero */
   display: flex;
   justify-content: center;
 }
@@ -15,25 +15,25 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 2rem;
-  background: #0a0a0a;
+  padding: 0.75rem 1.5rem; /* Slightly smaller buttons */
+  background: rgba(10, 10, 10, 0.9);
   color: var(--text-primary);
   text-decoration: none;
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;
-  min-width: 140px;
+  min-width: 130px;
   justify-content: center;
 }
 
 .social-btn:hover {
   border-color: var(--accent-color);
-  background: rgba(59, 130, 246, 0.05);
+  background: rgba(59, 130, 246, 0.1);
   transform: translateY(-2px);
   box-shadow: 4px 4px 0 var(--dither-color);
 }
 
 .social-icon {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   color: var(--accent-color);
@@ -41,7 +41,7 @@
 
 .social-name {
   font-family: 'Space Mono', monospace;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
 }
 
