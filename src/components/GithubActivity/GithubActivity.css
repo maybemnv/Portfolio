@@ -1,0 +1,28 @@
+.github-section {
+  padding: 2rem;
+  margin: 2rem 0;
+  background: #050505;
+}
+
+.github-title {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+/* Custom scrollbar for the calendar if it overflows */
+.calendar-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.calendar-container::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+}

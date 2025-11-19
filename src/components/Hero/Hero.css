@@ -1,0 +1,125 @@
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: #fff;
+  position: relative;
+}
+
+.hero-title {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.bracket {
+  color: var(--text-secondary);
+  margin: 0 0.5rem;
+}
+
+.hero-bio {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-sharp {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--accent-color);
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  border: 1px solid var(--accent-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-sharp:hover {
+  background: transparent;
+  color: var(--accent-color);
+  box-shadow: 4px 4px 0 var(--dither-color);
+  transform: translate(-2px, -2px);
+}
+
+.btn-sharp.outline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-sharp.outline:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* VISUAL */
+.hero-visual {
+  position: relative;
+}
+
+.dither-box {
+  width: 100%;
+  height: 400px;
+  background: #000;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.code-stream {
+  padding: 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  opacity: 0.7;
+}
+
+.code-line {
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: type 2s steps(40, end);
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-actions {
+    justify-content: center;
+  }
+  
+  .hero-visual {
+    display: none; /* Hide complex visual on mobile for minimal feel */
+  }
+}
