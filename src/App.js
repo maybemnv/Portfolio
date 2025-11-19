@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Socials from './components/Socials/Socials';
 import GithubActivity from './components/GithubActivity/GithubActivity';
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="scanline"></div>
+      <Navbar />
       <div className="container">
         <Hero />
         <Socials />
