@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaPython, FaJava, FaHtml5, FaJs, FaDatabase, FaTerminal, FaDocker, FaGitAlt, FaLinkedin, FaGithub, FaDiscord, FaEnvelope, FaAws } from 'react-icons/fa';
-import { SiFastapi, SiStreamlit, SiFlask, SiTensorflow, SiPytorch, SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiJupyter, SiPostman, SiX, SiScikitlearn, SiKeras, SiOpencv, SiHuggingface, SiPandas, SiNumpy, SiPlotly, SiMlflow, SiGnubash, SiReact, SiTailwindcss } from 'react-icons/si';
+import { FaPython, FaJava, FaHtml5, FaJs, FaDatabase, FaTerminal, FaDocker, FaGitAlt, FaLinkedin, FaGithub, FaDiscord, FaEnvelope, FaAws, FaRProject } from 'react-icons/fa';
+import { SiFastapi, SiStreamlit, SiFlask, SiTensorflow, SiPytorch, SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiJupyter, SiPostman, SiX, SiScikitlearn, SiKeras, SiOpencv, SiHuggingface, SiPandas, SiNumpy, SiPlotly, SiMlflow, SiGnubash, SiReact, SiTailwindcss, SiGooglecloud, SiVercel, SiRailway, SiRender, SiRedis, SiSqlite, SiNvidia } from 'react-icons/si';
+import { BiNetworkChart, BiLogoCPlusPlus } from 'react-icons/bi';
 
 export const portfolioData = {
   personalInfo: {
@@ -75,42 +76,45 @@ export const portfolioData = {
     "Languages": [
       { name: "Python", icon: <FaPython /> },
       { name: "Java", icon: <FaJava /> },
-      { name: "C", icon: null },
+      { name: "C", icon: <BiLogoCPlusPlus /> }, /* Using C++ icon as proxy or clear C text */
+      { name: "R", icon: <FaRProject /> },
       { name: "JavaScript", icon: <FaJs /> },
       { name: "SQL", icon: <FaDatabase /> },
       { name: "Bash", icon: <SiGnubash /> }
     ],
-    "AI & Machine Learning": [
+    "Frameworks & Libraries": [
       { name: "TensorFlow", icon: <SiTensorflow /> },
       { name: "PyTorch", icon: <SiPytorch /> },
       { name: "Scikit-learn", icon: <SiScikitlearn /> },
-      { name: "Keras", icon: <SiKeras /> },
-      { name: "OpenCV", icon: <SiOpencv /> },
+      { name: "LangChain", icon: <BiNetworkChart /> },
       { name: "Hugging Face", icon: <SiHuggingface /> },
-      { name: "LangChain", icon: null }
-    ],
-    "Data Engineering": [
       { name: "Pandas", icon: <SiPandas /> },
       { name: "NumPy", icon: <SiNumpy /> },
-      { name: "Plotly", icon: <SiPlotly /> },
-      { name: "MongoDB", icon: <SiMongodb /> },
-      { name: "PostgreSQL", icon: <SiPostgresql /> },
-      { name: "MySQL", icon: <SiMysql /> }
-    ],
-    "Web & MLOps": [
       { name: "FastAPI", icon: <SiFastapi /> },
       { name: "Flask", icon: <SiFlask /> },
       { name: "Streamlit", icon: <SiStreamlit /> },
-      { name: "React", icon: <SiReact /> },
-      { name: "Docker", icon: <FaDocker /> },
-      { name: "MLflow", icon: <SiMlflow /> },
-      { name: "Git", icon: <FaGitAlt /> },
-      { name: "AWS", icon: <FaAws /> }
+      { name: "LM Studio", icon: <SiNvidia /> }, /* Using Nvidia as proxy for local LLM runtime */
+      { name: "Auto-gen", icon: <FaTerminal /> }
     ],
-    "Tools": [
-      { name: "VS Code", icon: null },
-      { name: "Jupyter", icon: <SiJupyter /> },
-      { name: "Postman", icon: <SiPostman /> }
+    "Cloud & DevOps": [
+      { name: "AWS", icon: <FaAws /> },
+      { name: "GCP", icon: <SiGooglecloud /> },
+      { name: "Docker", icon: <FaDocker /> },
+      { name: "Vercel", icon: <SiVercel /> },
+      { name: "Render", icon: <SiRender /> },
+      { name: "Railway", icon: <SiRailway /> },
+      { name: "MLflow", icon: <SiMlflow /> },
+      { name: "Git", icon: <FaGitAlt /> }
+    ],
+    "Databases": [
+      { name: "PostgreSQL", icon: <SiPostgresql /> },
+      { name: "MongoDB", icon: <SiMongodb /> },
+      { name: "MySQL", icon: <SiMysql /> },
+      { name: "Redis", icon: <SiRedis /> },
+      { name: "SQLite", icon: <SiSqlite /> },
+      { name: "Firebase", icon: <SiFirebase /> },
+      { name: "Pinecone", icon: <FaDatabase /> },
+      { name: "FAISS", icon: <FaDatabase /> }
     ]
   },
   experience: [

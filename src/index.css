@@ -27,12 +27,16 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   
-  /* TECH GRID BACKGROUND */
+  /* SMOOTH DATA BACKGROUND */
   background-image: 
+    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center top;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+  background-position: 0 0, 0 0, 0 0, center top, center top;
+  background-attachment: fixed;
 }
 
 h1,
@@ -109,6 +113,10 @@ a {
   background-size: 100% 4px;
   pointer-events: none;
   z-index: 999;
+}
+
+.section-padding {
+  padding: 6rem 0;
 }
 
 /* SCROLLBAR */
