@@ -27,27 +27,47 @@ export const portfolioData = {
       timeline: "05/2025",
       description: "Architected an AI-powered educational assistant using RAG (Retrieval-Augmented Generation). Implemented custom prompt chains to deconstruct complex codebases into digestible learning modules.",
       github: "https://github.com/maybemnv/Synthex",
+      demo: "https://maybemnv-synthex-app-lupceq.streamlit.app/",
       tags: ["FastAPI", "LangChain", "RAG", "Streamlit"]
+    },
+    {
+      name: "LegalDocs",
+      timeline: "12/2024",
+      description: "Designed and deployed a generative AI prototype integrating Gemini APIs with RAG (Cohere embeddings) to enable scalable document analysis using FastAPI, LangChain, and React.",
+      github: "https://github.com/maybemnv/LegalDocs",
+      demo: "https://legal-docs-livid.vercel.app/",
+      tags: ["FastAPI", "Gemini API", "RAG", "React"]
+    },
+    {
+      name: "State Budget Analysis",
+      timeline: "11/2024",
+      description: "Developed an automated ETL pipeline for state budget analysis, performing data cleaning, schema transformation, and reporting to improve accessibility and policy insights.",
+      github: "https://github.com/maybemnv/State-Budget-Analysis",
+      demo: "https://maybemnv-state-budget-analysis-app-26tzub.streamlit.app/",
+      tags: ["ETL", "Data Engineering", "Streamlit", "Python"]
+    },
+    {
+      name: "Cover Letter & Resume Gen",
+      timeline: "10/2024",
+      description: "An intelligent tool for generating tailored cover letters and resumes. Optimizes content for ATS systems using advanced language models to increase interview chances.",
+      github: "https://github.com/maybemnv/Cover-Letter-Generator",
+      demo: "https://cover-letter-and-tailored-resume.onrender.com/",
+      tags: ["GenAI", "NLP", "Resume Builder", "Python"]
     },
     {
       name: "LinkedIn Post Generator",
       timeline: "04/2025",
       description: "Deployed a multilingual content generation engine using LLaMA 3-70B via Groq API. Optimized inference latency and implemented few-shot prompting for tone consistency.",
       github: "https://github.com/maybemnv/LinkedIn-Post-Generator",
+      demo: null,
       tags: ["LLaMA 3", "Groq API", "Prompt Engineering"]
-    },
-    {
-      name: "AI-Driven YouTube Summarizer",
-      timeline: "02/2025",
-      description: "Built a video analytics pipeline leveraging Google Gemini 1.5 Pro. Features include transcript extraction, semantic summarization, and automated quiz generation for active recall.",
-      github: "https://github.com/maybemnv/AI-Powered-YouTube-Video-Summarizer-Quiz-Generator",
-      tags: ["Gemini Pro", "NLP", "Video Analytics"]
     },
     {
       name: "APS-Failure Prediction",
       timeline: "12/2024",
       description: "Developed a predictive maintenance system for heavy-duty vehicle air pressure systems. Achieved 98% recall using XGBoost and SMOTE for handling extreme class imbalance.",
       github: "https://github.com/maybemnv/predictive-maintenance-for-air-pressure-system-aps",
+      demo: null,
       tags: ["XGBoost", "Scikit-learn", "Imbalanced Learning"]
     }
   ],

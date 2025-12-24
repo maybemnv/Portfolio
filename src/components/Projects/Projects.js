@@ -1,6 +1,7 @@
 import React from 'react';
 import { portfolioData } from '../../data/portfolio';
 import './Projects.css';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Projects = () => {
   return (
@@ -25,9 +26,16 @@ const Projects = () => {
               ))}
             </div>
             
-            <a href={project.github} target="_blank" rel="noreferrer" className="project-link">
-              git checkout &rarr;
-            </a>
+            <div className="project-links">
+              <a href={project.github} target="_blank" rel="noreferrer" className="project-link">
+                <FaGithub /> git checkout
+              </a>
+              {project.demo && (
+                <a href={project.demo} target="_blank" rel="noreferrer" className="project-link demo-link">
+                  <FaExternalLinkAlt /> live demo
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>
