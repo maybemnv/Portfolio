@@ -1,29 +1,33 @@
-import React from 'react';
+'use client';
+
 import { GitHubCalendar } from 'react-github-calendar';
-import './GithubActivity.css';
+import { useInView } from '@/hooks/useInView';
 
-const customTheme = {
-  dark: ['#0d1117', '#1f2937', '#1e3a8a', '#2563eb', '#3b82f6']
-};
+const theme = { dark: ['#0d1117', '#1f2937', '#1e3a8a', '#2563eb', '#3b82f6'] };
 
-const GithubActivity: React.FC = () => {
+export default function GithubActivity() {
+  const { ref, inView } = useInView();
+
   return (
-    <section className="github-section sharp-box">
-      <h3 className="github-title">
-        <span className="hash">#</span> git_commit_log
-      </h3>
-      <div className="calendar-container">
-        <GitHubCalendar
-          username="maybemnv"
-          colorScheme="dark"
-          theme={customTheme}
-          blockSize={12}
-          blockMargin={4}
-          fontSize={12}
-        />
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`mb-8 animate-section ${inView ? 'visible' : ''}`}
+    >
+      <div className="sharp-box p-6">
+        <h3 className="font-mono text-white text-lg mb-6">
+          <span className="text-accent">#</span> git_commit_log
+        </h3>
+        <div className="overflow-x-auto pb-2 flex justify-center">
+          <GitHubCalendar
+            username="maybemnv"
+            colorScheme="dark"
+            theme={theme}
+            blockSize={12}
+            blockMargin={4}
+            fontSize={12}
+          />
+        </div>
       </div>
     </section>
   );
-};
-
-export default GithubActivity;
+}

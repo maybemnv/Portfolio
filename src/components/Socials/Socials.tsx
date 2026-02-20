@@ -1,28 +1,26 @@
-import React from 'react';
-import { portfolioData } from '../../data/portfolio';
-import './Socials.css';
+'use client';
 
-const Socials: React.FC = () => {
+import { portfolioData } from '@/data/portfolio';
+
+export default function Socials() {
   const { social } = portfolioData.personalInfo;
 
   return (
-    <section className="socials-section">
-      <div className="socials-grid">
-        {social.map((item, index) => (
+    <section className="pb-12 flex justify-center">
+      <div className="flex flex-wrap gap-3 justify-center">
+        {social.map((item, i) => (
           <a
-            key={index}
+            key={i}
             href={item.link}
             target="_blank"
             rel="noreferrer"
-            className="social-btn sharp-box"
+            className="sharp-box flex items-center gap-3 px-5 py-3 min-w-[130px] justify-center text-text-primary transition-all duration-200"
           >
-            <span className="social-icon">{item.icon}</span>
-            <span className="social-name">{item.name}</span>
+            <span className="text-accent text-lg flex items-center">{item.icon}</span>
+            <span className="font-mono text-sm uppercase">{item.name}</span>
           </a>
         ))}
       </div>
     </section>
   );
-};
-
-export default Socials;
+}
