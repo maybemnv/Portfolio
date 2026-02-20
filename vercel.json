@@ -1,17 +1,12 @@
 {
-    "headers": [
-      {
-        "source": "/resume.pdf",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/pdf"
-          },
-          {
-            "key": "Content-Disposition",
-            "value": "attachment; filename=resume.pdf"
-          }
-        ]
-      }
-    ]
-  }
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/Resume.pdf",
+      "headers": [
+        { "key": "Content-Type", "value": "application/pdf" },
+        { "key": "Content-Disposition", "value": "attachment; filename=Resume.pdf" }
+      ]
+    }
+  ]
+}
