@@ -56,12 +56,20 @@ export const portfolioData: PortfolioData = {
       tags: ["GenAI", "NLP", "Resume Builder", "Python"]
     },
     {
-      name: "LinkedIn Post Generator",
-      timeline: "04/2025",
-      description: "Deployed a multilingual content generation engine using LLaMA 3-70B via Groq API. Optimized inference latency and implemented few-shot prompting for tone consistency.",
-      github: "https://github.com/maybemnv/LinkedIn-Post-Generator",
+      name: "Epidemiology AI",
+      timeline: "02/2025",
+      description: "AI-powered disease outbreak early warning system that fuses health clinic reports, pharmacy sales spikes, social media trends, and climate data. Uses time-series anomaly detection to predict outbreak probability before traditional surveillance catches up.",
+      github: "https://github.com/maybemnv/Epidemiology-AI",
       demo: null,
-      tags: ["LLaMA 3", "Groq API", "Prompt Engineering"]
+      tags: ["Time-Series", "Anomaly Detection", "Public Health", "Python"]
+    },
+    {
+      name: "AI Patrolling & Bandobast System",
+      timeline: "01/2025",
+      description: "Computer vision and NLP surveillance intelligence platform for police operations. Combines YOLOv8n object detection (31ms inference), crowd density analysis, anomaly detection, and a RAG pipeline with FAISS vector store — all served via a FastAPI backend and a React command center dashboard.",
+      github: "https://github.com/maybemnv/AI-Driven-Patrolling-and-Bandobast-Intelligence-System",
+      demo: null,
+      tags: ["YOLOv8", "RAG", "FastAPI", "Computer Vision"]
     },
     {
       name: "APS-Failure Prediction",
