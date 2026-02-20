@@ -1,6 +1,0 @@
-[00:00:01.386] Server  LOG     ✓ Ready in 980ms
-[00:00:03.959] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:04.500] Browser WARN    THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
-[00:05:14.749] Server  LOG     ✓ Compiled in 639ms
-[00:05:17.648] Browser LOG     THREE.WebGLRenderer: Context Lost.
-[00:05:28.870] Server  LOG     ✓ Compiled in 128ms
