@@ -1,9 +1,9 @@
-import React from 'react';
+import { PortfolioData } from '../types/portfolio';
 import { FaPython, FaJava, FaHtml5, FaJs, FaDatabase, FaTerminal, FaDocker, FaGitAlt, FaLinkedin, FaGithub, FaDiscord, FaEnvelope, FaAws, FaRProject } from 'react-icons/fa';
 import { SiFastapi, SiStreamlit, SiFlask, SiTensorflow, SiPytorch, SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiJupyter, SiPostman, SiX, SiScikitlearn, SiKeras, SiOpencv, SiHuggingface, SiPandas, SiNumpy, SiPlotly, SiMlflow, SiGnubash, SiReact, SiTailwindcss, SiGooglecloud, SiVercel, SiRailway, SiRender, SiRedis, SiSqlite, SiNvidia } from 'react-icons/si';
 import { BiNetworkChart, BiLogoCPlusPlus } from 'react-icons/bi';
 
-export const portfolioData = {
+export const portfolioData: PortfolioData = {
   personalInfo: {
     name: "Manav Kaushal",
     title: "Data Scientist | AI Engineer",
@@ -76,7 +76,7 @@ export const portfolioData = {
     "Languages": [
       { name: "Python", icon: <FaPython /> },
       { name: "Java", icon: <FaJava /> },
-      { name: "C", icon: <BiLogoCPlusPlus /> }, /* Using C++ icon as proxy or clear C text */
+      { name: "C", icon: <BiLogoCPlusPlus /> },
       { name: "R", icon: <FaRProject /> },
       { name: "JavaScript", icon: <FaJs /> },
       { name: "SQL", icon: <FaDatabase /> },
@@ -93,7 +93,7 @@ export const portfolioData = {
       { name: "FastAPI", icon: <SiFastapi /> },
       { name: "Flask", icon: <SiFlask /> },
       { name: "Streamlit", icon: <SiStreamlit /> },
-      { name: "LM Studio", icon: <SiNvidia /> }, /* Using Nvidia as proxy for local LLM runtime */
+      { name: "LM Studio", icon: <SiNvidia /> },
       { name: "Auto-gen", icon: <FaTerminal /> }
     ],
     "Cloud & DevOps": [

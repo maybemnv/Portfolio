@@ -8,7 +8,7 @@ import Experience from './components/Experience/Experience';
 import Skills from './components/Skills/Skills';
 import './index.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="app-container">
       <div className="scanline"></div>
@@ -20,15 +20,15 @@ function App() {
         <Projects />
         <Experience />
         <Skills />
-        
+
         <footer className="footer">
           <p className="dither-text">
-            Designed & Built by Manav Kaushal
+            Designed &amp; Built by Manav Kaushal
           </p>
         </footer>
       </div>
     </div>
   );
-}
+};
 
 export default App;

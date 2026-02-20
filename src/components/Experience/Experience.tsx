@@ -2,7 +2,7 @@ import React from 'react';
 import { portfolioData } from '../../data/portfolio';
 import './Experience.css';
 
-const Experience = () => {
+const Experience: React.FC = () => {
   const { experience, education } = portfolioData;
 
   return (
@@ -19,7 +19,6 @@ const Experience = () => {
           <span>VAL_ACC</span>
         </div>
 
-        {/* Work Experience */}
         {experience.map((exp, index) => (
           <div key={`exp-${index}`} className="log-entry">
             <div className="log-meta">
@@ -41,10 +40,9 @@ const Experience = () => {
           </div>
         ))}
 
-        {/* Education (treated as early training epochs) */}
         {education.map((edu, index) => (
           <div key={`edu-${index}`} className="log-entry education">
-             <div className="log-meta">
+            <div className="log-meta">
               <span className="epoch-count">Epoch {index + 1}/Init</span>
               <span className="metric-value">0.8{index}5</span>
               <span className="metric-value">0.7{index}2</span>
