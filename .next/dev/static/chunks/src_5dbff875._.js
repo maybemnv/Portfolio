@@ -778,8 +778,7 @@ function Hero() {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                            className: "glitch-text text-5xl md:text-6xl font-bold text-white mb-2 leading-tight",
-                            "data-text": personalInfo.name,
+                            className: "text-5xl md:text-6xl font-bold text-white mb-2 leading-tight",
                             children: personalInfo.name
                         }, void 0, false, {
                             fileName: "[project]/src/components/Hero/Hero.tsx",
@@ -794,7 +793,7 @@ function Hero() {
                                     children: "["
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Hero/Hero.tsx",
-                                    lineNumber: 42,
+                                    lineNumber: 39,
                                     columnNumber: 13
                                 }, this),
                                 personalInfo.title,
@@ -803,13 +802,13 @@ function Hero() {
                                     children: "]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Hero/Hero.tsx",
-                                    lineNumber: 44,
+                                    lineNumber: 41,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Hero/Hero.tsx",
-                            lineNumber: 41,
+                            lineNumber: 38,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -817,7 +816,7 @@ function Hero() {
                             children: personalInfo.about[0]
                         }, void 0, false, {
                             fileName: "[project]/src/components/Hero/Hero.tsx",
-                            lineNumber: 47,
+                            lineNumber: 44,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -829,7 +828,7 @@ function Hero() {
                                     children: "Initialize_Contact()"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Hero/Hero.tsx",
-                                    lineNumber: 52,
+                                    lineNumber: 49,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -840,7 +839,7 @@ function Hero() {
                                     children: "View_Source"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Hero/Hero.tsx",
-                                    lineNumber: 58,
+                                    lineNumber: 55,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -851,13 +850,13 @@ function Hero() {
                                     children: "Download_Resume()"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Hero/Hero.tsx",
-                                    lineNumber: 66,
+                                    lineNumber: 63,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Hero/Hero.tsx",
-                            lineNumber: 51,
+                            lineNumber: 48,
                             columnNumber: 11
                         }, this)
                     ]
@@ -873,7 +872,7 @@ function Hero() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(NeuralCanvas, {}, void 0, false, {
                                 fileName: "[project]/src/components/Hero/Hero.tsx",
-                                lineNumber: 80,
+                                lineNumber: 77,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -883,31 +882,31 @@ function Hero() {
                                         children: "NEURAL_NET_V1.0"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Hero/Hero.tsx",
-                                        lineNumber: 82,
+                                        lineNumber: 79,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: "TRAINING..."
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Hero/Hero.tsx",
-                                        lineNumber: 83,
+                                        lineNumber: 80,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Hero/Hero.tsx",
-                                lineNumber: 81,
+                                lineNumber: 78,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Hero/Hero.tsx",
-                        lineNumber: 79,
+                        lineNumber: 76,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Hero/Hero.tsx",
-                    lineNumber: 78,
+                    lineNumber: 75,
                     columnNumber: 9
                 }, this)
             ]

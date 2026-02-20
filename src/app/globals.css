@@ -141,46 +141,6 @@ a {
   transform: translateY(0);
 }
 
-/* Glitch effect */
-@keyframes glitch {
-  0%,
-  100% {
-    clip-path: inset(0 0 98% 0);
-    transform: translate(-2px, 0);
-  }
-  20% {
-    clip-path: inset(30% 0 60% 0);
-    transform: translate(2px, 0);
-  }
-  40% {
-    clip-path: inset(60% 0 30% 0);
-    transform: translate(-2px, 0);
-  }
-  60% {
-    clip-path: inset(80% 0 10% 0);
-    transform: translate(2px, 0);
-  }
-  80% {
-    clip-path: inset(10% 0 80% 0);
-    transform: translate(-2px, 0);
-  }
-}
-
-.glitch-text {
-  position: relative;
-}
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  color: var(--accent-color);
-  animation: glitch 4s infinite;
-}
-.glitch-text::after {
-  color: rgba(99, 102, 241, 0.8);
-  animation-delay: 0.1s;
-}
 
 @keyframes blink {
   0%,

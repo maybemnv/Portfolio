@@ -1,9 +1,20 @@
-# dependencies
-/node_modules
-/build
-/.history
-yarn.lock
+# deps
+node_modules/
+
+# Next.js
 .next/
-.turbo/
+out/
+
+# CRA legacy
+build/
+
+# env
 .env
 .env.local
+.env.*.local
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.turbo/

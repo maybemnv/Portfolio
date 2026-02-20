@@ -31,10 +31,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <h1
-            className="glitch-text text-5xl md:text-6xl font-bold text-white mb-2 leading-tight"
-            data-text={personalInfo.name}
-          >
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-2 leading-tight">
             {personalInfo.name}
           </h1>
 
