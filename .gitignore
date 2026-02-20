@@ -3,3 +3,7 @@
 /build
 /.history
 yarn.lock
+.next/
+.turbo/
+.env
+.env.local
