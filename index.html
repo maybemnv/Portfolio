@@ -34,14 +34,26 @@
     inset:0;
     z-index:50;
     pointer-events:none;
-    background:repeating-linear-gradient(
-      to bottom,
-      #000 0px,
-      #000 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    opacity:0.03;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.02) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.02) 4px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.03) 0px,
+        rgba(0,0,0,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
   }
 
   #terminal{
@@ -79,7 +91,7 @@
   #output > div{ margin:0; }
   .block{ margin:2px 0 12px; }
   .block::after{
-    content:"\25C8\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\25C8";
+    content:"\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8";
     display:block;
     width:fit-content;
     max-width:100%;
@@ -129,7 +141,7 @@
     margin-top:8px;
   }
   #pills::before{
-    content:"\25C8\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\25C8";
+    content:"\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8\2501\2501\25C8";
     display:block;
     width:fit-content;
     max-width:100%;
@@ -144,22 +156,28 @@
     font-family:inherit;
     font-size:12px;
     line-height:1;
-    color:var(--muted);
+    color:var(--fg);
     background:transparent;
-    border:1px solid #222;
-    border-radius:2px;
+    border:1px solid #c0c0c0;
     padding:5px 8px;
     cursor:pointer;
     transition:color .15s ease, border-color .15s ease;
     -webkit-appearance:none;
   }
-  .pill::before{ content:'['; }
-  .pill::after{ content:']'; }
+  .pill::before{
+    content:"\25C8";
+    color:#c0c0c0;
+    margin-right:4px;
+    transition:color .15s ease;
+  }
   .pill:hover,
   .pill:focus-visible{
-    color:var(--fg);
     border-color:var(--accent);
     outline:none;
+  }
+  .pill:hover::before,
+  .pill:focus-visible::before{
+    color:var(--accent);
   }
 
   /* Input line */
@@ -268,15 +286,16 @@
 
   (function(){
     var ds = document.getElementById('datestamp');
+    var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
     function update(){
       var now = new Date();
-      var y = now.getFullYear();
-      var mo = String(now.getMonth()+1).padStart(2,'0');
       var d = String(now.getDate()).padStart(2,'0');
+      var mo = months[now.getMonth()];
+      var y = now.getFullYear();
       var h = String(now.getHours()).padStart(2,'0');
       var mi = String(now.getMinutes()).padStart(2,'0');
       var s = String(now.getSeconds()).padStart(2,'0');
-      ds.textContent = y+'/'+mo+"/"+d+" "+h+":"+mi+":"+s;
+      ds.textContent = d+' '+mo+' '+y+'  '+h+':'+mi+':'+s;
     }
     update();
     setInterval(update, 1000);
