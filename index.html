@@ -195,11 +195,23 @@
     resize:none;
   }
 
+  #datestamp{
+    position:absolute;
+    bottom:40px;
+    right:20px;
+    color:var(--accent);
+    opacity:0.5;
+    font-size:11px;
+    letter-spacing:0.5px;
+    pointer-events:none;
+  }
+
   @media (max-width:600px){
     body{ font-size:12px; }
     #terminal{ padding:14px 13px 10px; }
     .pill{ font-size:11px; }
     .ascii{ text-shadow:0 0 6px rgba(255,60,0,0.45); }
+    #datestamp{ bottom:30px; font-size:10px; }
   }
 </style>
 </head>
@@ -221,6 +233,7 @@
       <span class="ps"><span class="accent">root@manav</span>:<span id="promptPath">~</span>$ </span><span id="mirror"></span><span id="cursor">&#9608;</span>
       <input id="cmdInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" />
     </div>
+    <span id="datestamp"></span>
   </div>
 
 <script>
@@ -242,6 +255,22 @@
   var cwd = '~';
   var prevCwd = '~';
   var bootTime = Date.now();
+
+  (function(){
+    var ds = document.getElementById('datestamp');
+    function update(){
+      var now = new Date();
+      var y = now.getFullYear();
+      var mo = String(now.getMonth()+1).padStart(2,'0');
+      var d = String(now.getDate()).padStart(2,'0');
+      var h = String(now.getHours()).padStart(2,'0');
+      var mi = String(now.getMinutes()).padStart(2,'0');
+      var s = String(now.getSeconds()).padStart(2,'0');
+      ds.textContent = y+'/'+mo+"/"+d+" "+h+":"+mi+":"+s;
+    }
+    update();
+    setInterval(update, 1000);
+  })();
 
   function promptStr(){
     return '<span class="accent">root@manav</span>:' + escapeHtml(cwd) + '$ ';
