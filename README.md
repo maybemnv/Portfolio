@@ -1,39 +1,45 @@
-Nah gang now we employed you — you can read my repo and copy the sauce hehehehe
+# root@manav:~$
 
----
+Interactive terminal portfolio for **Manav Kaushal** — Backend Engineer & AI Systems builder. One file, zero frameworks, no build step.
 
-This the sauce behind my portfolio — built with **Next.js 16**, **React 19**, **Three.js**, and **Tailwind CSS**. Dark, brutalist, terminal-coded aesthetic. Neural network particle canvas in the hero. ML-themed everything. Experience logged as training epochs. Skills plotted as feature importance. GitHub activity rendered as `git_commit_log`. Zero border-radius. CRT scanlines. `Space Mono` headers. The whole nine.
+### Features
 
-### Sections
+- **Boot sequence** — BIOS → kernel → ASCII art → system online
+- **Shell** — 17 commands including `whoami`, `ls`, `cat`, `skills`, `exp`, `contact`, `cd`, `pwd`, `history`, `uptime`, `uname`, `sudo`, `clear`, `help`
+- **Tab completion** — directory names for `cd`, fuzzy project slugs for `cat`, common-prefix fill for general commands
+- **Command history** — arrow up/down, last 20 entries
+- **Quick-nav pills** — click to auto-type and execute commands
+- **Mobile responsive** — font-size, padding, and layout adapt under 600px
 
-- **Hero** — Avatar, name, title, CTA buttons (`Initialize_Contact()`, `View_Source`, `Download_Resume()`), and a 3D neural-network particle animation powered by `@react-three/fiber`
-- **About** — Styled as a shell script (`~/manav/about.sh`) with `>_` prompts and a blinking cursor
-- **Socials** — Email, GitHub, LinkedIn, X, Discord — all the links
-- **GitHub Activity** — Live contribution calendar via `react-github-calendar`
-- **Projects** — 7 projects with tech tags, `git checkout` links, and live demos where applicable
-- **Experience / Education** — Logged as ML training epochs with fake loss/accuracy metrics. Education = `Init` epochs
-- **Skills** — Categorized tags on the left, `Feature_Importance` bar chart on the right
+### Aesthetic
+
+Y2K chain-themed terminal window with orange (#ff3c00) frame, silver (#c0c0c0) chain dividers, live digicam timestamp, CRT scanlines + pixel grid overlay, `[ MANAV.EXE ]` title bar, `◈`-prefixed pill tags. Sharp corners throughout. No images, SVGs, or external assets beyond the Google Fonts preconnect.
 
 ### Stack
 
 | Layer | Tech |
 |-------|------|
-| Framework | Next.js 16 (App Router) + TypeScript |
-| UI | React 19 + Tailwind CSS 3.4 |
-| 3D | Three.js via `@react-three/fiber` + `@react-three/drei` |
-| Icons | `react-icons` (Font Awesome, Simple Icons, Box Icons) |
-| GitHub | `react-github-calendar` |
-| Deploy | Vercel |
+| UI | Vanilla HTML + CSS + JS in a single file |
+| Font | JetBrains Mono (Google Fonts) |
+| Deploy | Vercel (static, `framework: null`) |
+
+No frameworks, no bundlers, no node_modules.
 
 ### Run It
 
 ```bash
-npm install
-npm run dev
+npm install   # noop — zero deps
+npx serve .
 ```
 
-Then hit `localhost:3000` and vibe with it.
+Or just open `index.html` directly in a browser.
+
+### Deploy
+
+```bash
+vercel --prod
+```
 
 ---
 
-aye don't just sit there — [initialize_contact()](mailto:maybemnv@gmail.com)
+[maybemnv@gmail.com](mailto:maybemnv@gmail.com)
