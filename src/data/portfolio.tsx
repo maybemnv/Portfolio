@@ -113,13 +113,13 @@ export const portfolioData: PortfolioData = {
       tags: ["YOLOv8", "RAG", "FastAPI", "Computer Vision"],
     },
     {
-      name: "Epidemiology AI",
-      timeline: "02/2025",
+      name: "GrabPic",
+      timeline: "06/2026",
       description:
-        "Disease outbreak early warning system that fuses health clinic reports, pharmacy sales spikes, social media trends, and climate data. Time-series anomaly detection flags outbreak probability before traditional surveillance catches up.",
-      github: "https://github.com/maybemnv/Epidemiology-AI",
+        "Facial recognition-powered event photo distribution. Organizers upload photos once; attendees take a selfie and get a personalized gallery in under 5 seconds.",
+      github: "https://github.com/maybemnv/GrabPic",
       demo: null,
-      tags: ["Time-Series", "Anomaly Detection", "Public Health", "Python"],
+      tags: ["Computer Vision", "Facial Recognition", "FastAPI", "Python"],
     },
     {
       name: "LegalDocs",
