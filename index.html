@@ -64,6 +64,18 @@
   }
   #output > div{ margin:0; }
   .block{ margin:2px 0 12px; }
+  .block::after{
+    content:"\25C8\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\25C8";
+    display:block;
+    width:fit-content;
+    max-width:100%;
+    overflow:hidden;
+    color:#c0c0c0;
+    font-size:12px;
+    line-height:1.5;
+    border-bottom:1px solid #c0c0c0;
+    margin-top:8px;
+  }
 
   #output::-webkit-scrollbar{ width:8px; }
   #output::-webkit-scrollbar-track{ background:transparent; }
@@ -100,8 +112,19 @@
     gap:8px;
     flex:0 0 auto;
     padding:10px 0 12px;
-    border-top:1px solid #161616;
     margin-top:8px;
+  }
+  #pills::before{
+    content:"\25C8\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\2501\25C8";
+    display:block;
+    width:fit-content;
+    max-width:100%;
+    overflow:hidden;
+    color:#c0c0c0;
+    font-size:12px;
+    line-height:1.5;
+    border-bottom:1px solid #c0c0c0;
+    margin-bottom:10px;
   }
   .pill{
     font-family:inherit;
