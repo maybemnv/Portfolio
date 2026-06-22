@@ -47,11 +47,25 @@
   #terminal{
     display:flex;
     flex-direction:column;
+    position:relative;
     height:100vh;
     height:100dvh;
     max-width:1040px;
     margin:0 auto;
-    padding:20px 20px 14px;
+    padding:36px 20px 14px;
+    border:2px solid var(--accent);
+  }
+  #terminal::before{
+    content:"[ MANAV.EXE ]";
+    position:absolute;
+    top:-14px;
+    left:16px;
+    background:var(--bg);
+    color:var(--accent);
+    font-size:11px;
+    letter-spacing:1.5px;
+    padding:0 8px;
+    line-height:1;
   }
 
   #output{
