@@ -11,7 +11,7 @@ import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 export default function Home() {
   return (
     <div className="relative" style={{ backgroundColor: 'var(--bg-color)' }}>
-      <div className="scanline" />
+      <div className="scanline" aria-hidden="true" />
       <Navbar />
       <main className="max-w-5xl mx-auto px-5 pt-24">
         <Hero />

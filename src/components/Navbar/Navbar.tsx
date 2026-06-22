@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 const NAV_ITEMS = [
@@ -9,23 +9,25 @@ const NAV_ITEMS = [
   { label: 'Skills', id: 'skills' },
 ];
 
+const NAV_IDS = NAV_ITEMS.map((item) => item.id);
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const active = useScrollSpy(['projects', 'experience', 'skills']);
+  const active = useScrollSpy(NAV_IDS);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = useCallback((id: string) => {
     setOpen(false);
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
     else window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
   return (
     <>
@@ -34,6 +36,7 @@ export default function Navbar() {
           <button
             onClick={() => scrollTo('root')}
             className="font-mono font-bold text-2xl text-white tracking-tighter cursor-pointer"
+            aria-label="Manav Kaushal — Home"
           >
             MK<span className="text-accent">.</span>
           </button>
@@ -60,6 +63,8 @@ export default function Navbar() {
             className="md:hidden font-mono text-text-secondary hover:text-accent transition-colors"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? '✕' : '≡'}
           </button>
@@ -67,8 +72,13 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile drawer */}
-      <div className={`fixed top-0 left-0 w-full z-40 bg-bg border-b border-border transition-all duration-300 overflow-hidden md:hidden
-        ${open ? 'max-h-64 pt-20' : 'max-h-0'}`}>
+      <div
+        id="mobile-menu"
+        role="navigation"
+        aria-label="Mobile navigation"
+        className={`fixed top-0 left-0 w-full z-40 bg-bg border-b border-border transition-all duration-300 overflow-hidden md:hidden
+        ${open ? 'max-h-64 pt-20' : 'max-h-0'}`}
+      >
         <ul className="flex flex-col list-none px-5 pb-6 gap-6">
           {NAV_ITEMS.map(({ label, id }) => (
             <li key={id}>

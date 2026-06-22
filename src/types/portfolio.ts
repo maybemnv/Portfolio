@@ -13,6 +13,8 @@ export interface PersonalInfo {
   location: string;
   social: SocialLink[];
   about: string[];
+  resumeUrl: string;
+  githubUsername: string;
 }
 
 export interface Project {
@@ -27,6 +29,11 @@ export interface Project {
 export interface Skill {
   name: string;
   icon: ReactElement;
+}
+
+export interface FeatureImportance {
+  label: string;
+  value: number;
 }
 
 export interface ExperienceEntry {
@@ -46,6 +53,7 @@ export interface PortfolioData {
   personalInfo: PersonalInfo;
   projects: Project[];
   skills: Record<string, Skill[]>;
+  featureImportance: FeatureImportance[];
   experience: ExperienceEntry[];
   education: EducationEntry[];
 }

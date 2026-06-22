@@ -10,16 +10,16 @@ module.exports = {
     extend: {
       colors: {
         bg: '#050505',
-        accent: '#3b82f6',
-        'accent-dim': 'rgba(59,130,246,0.1)',
-        border: '#333',
+        accent: '#60a5fa',
+        'accent-dim': 'rgba(96,165,250,0.1)',
+        border: '#444',
         'text-primary': '#e0e0e0',
         'text-secondary': '#a0a0a0',
         dither: '#222',
       },
       fontFamily: {
-        mono: ['"Space Mono"', 'monospace'],
-        sans: ['Outfit', 'sans-serif'],
+        mono: ['var(--font-mono)', '"Space Mono"', 'monospace'],
+        sans: ['var(--font-sans)', 'Outfit', 'sans-serif'],
       },
       animation: {
         'fade-up': 'fadeUp 0.6s ease-out forwards',

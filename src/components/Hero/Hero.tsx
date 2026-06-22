@@ -8,9 +8,11 @@ const NeuralCanvas = dynamic(() => import('./NeuralCanvas'), { ssr: false });
 
 export default function Hero() {
   const { personalInfo } = portfolioData;
+  const emailLink = personalInfo.social.find((s) => s.name === 'Email')?.link ?? '#';
+  const githubLink = personalInfo.social.find((s) => s.name === 'GitHub')?.link ?? '#';
 
   return (
-    <section className="min-h-[70vh] flex items-center py-8">
+    <section id="hero" className="min-h-[70vh] flex items-center py-8" aria-labelledby="hero-heading">
       <div className="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-12 items-center w-full">
         {/* Left: text */}
         <div>
@@ -24,14 +26,14 @@ export default function Hero() {
                 height={64}
                 className="rounded-full ring-2 ring-accent ring-offset-2 ring-offset-bg"
               />
-              <span className="absolute bottom-0 right-0 w-3 h-3 bg-accent rounded-full shadow-[0_0_8px_#3b82f6] animate-pulse" />
+              <span className="absolute bottom-0 right-0 w-3 h-3 bg-accent rounded-full shadow-[0_0_8px_#60a5fa] animate-pulse" aria-hidden="true" />
             </div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs text-accent border border-accent/30 bg-accent/5 px-3 py-1">
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-accent border border-accent/30 bg-accent/5 px-3 py-1" aria-hidden="true">
               SYSTEM_ONLINE
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-2 leading-tight">
+          <h1 id="hero-heading" className="text-5xl md:text-6xl font-bold text-white mb-2 leading-tight">
             {personalInfo.name}
           </h1>
 
@@ -47,23 +49,26 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-3">
             <a
-              href={personalInfo.social[0].link}
-              className="font-mono font-bold text-sm uppercase px-6 py-3 bg-accent text-black border border-accent transition-all duration-200 hover:bg-transparent hover:text-accent hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:-translate-y-0.5"
+              href={emailLink}
+              aria-label="Contact via email"
+              className="font-mono font-bold text-sm uppercase px-6 py-3 bg-accent text-black border border-accent transition-all duration-200 hover:bg-transparent hover:text-accent hover:shadow-[0_0_15px_rgba(96,165,250,0.4)] hover:-translate-y-0.5"
             >
               Initialize_Contact()
             </a>
             <a
-              href={personalInfo.social[1].link}
+              href={githubLink}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label="View GitHub profile"
               className="font-mono text-sm uppercase px-6 py-3 border border-border text-text-primary transition-all duration-200 hover:border-accent hover:text-accent hover:-translate-y-0.5"
             >
               View_Source
             </a>
             <a
-              href="https://drive.google.com/file/d/1bkbVDHwq3ZYYU3J0oz3v4kBP3o4bPr90/view"
+              href={personalInfo.resumeUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label="Download resume (opens in new tab)"
               className="font-mono text-sm uppercase px-6 py-3 border border-border text-text-primary transition-all duration-200 hover:border-accent hover:text-accent hover:-translate-y-0.5"
             >
               Download_Resume()
@@ -73,7 +78,7 @@ export default function Hero() {
 
         {/* Right: Three.js canvas */}
         <div className="hidden md:flex justify-end">
-          <div className="sharp-box w-full max-w-sm h-72 overflow-hidden relative">
+          <div className="sharp-box w-full max-w-sm h-72 overflow-hidden relative" aria-hidden="true">
             <NeuralCanvas />
             <div className="absolute bottom-2 right-3 font-mono text-xs text-accent/80 flex flex-col items-end">
               <span>NEURAL_NET_V1.0</span>

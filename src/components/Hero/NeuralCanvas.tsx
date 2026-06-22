@@ -51,14 +51,14 @@ function Particles() {
         <bufferGeometry>
           <bufferAttribute args={[positions, 3]} attach="attributes-position" />
         </bufferGeometry>
-        <pointsMaterial color="#3b82f6" size={0.06} sizeAttenuation transparent opacity={0.9} />
+        <pointsMaterial color="#60a5fa" size={0.06} sizeAttenuation transparent opacity={0.9} />
       </points>
 
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute args={[connections, 3]} attach="attributes-position" />
         </bufferGeometry>
-        <lineBasicMaterial color="#3b82f6" transparent opacity={0.15} />
+        <lineBasicMaterial color="#60a5fa" transparent opacity={0.15} />
       </lineSegments>
     </group>
   );
@@ -67,7 +67,7 @@ function Particles() {
 export default function NeuralCanvas() {
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 60 }} dpr={[1, 1.5]}>
         <ambientLight intensity={0.5} />
         <Particles />
       </Canvas>

@@ -9,6 +9,7 @@ export default function About() {
 
   return (
     <section
+      id="about"
       ref={ref as React.RefObject<HTMLElement>}
       className={`py-8 animate-section ${inView ? 'visible' : ''}`}
     >
@@ -18,11 +19,11 @@ export default function About() {
         </div>
         {about.map((para, i) => (
           <div key={i} className="flex gap-3 mb-4 last:mb-0">
-            <span className="text-accent shrink-0">&gt;_</span>
+            <span className="text-accent shrink-0" aria-hidden="true">&gt;_</span>
             <p className="text-text-secondary leading-relaxed">{para}</p>
           </div>
         ))}
-        <span className="inline-block w-2 h-4 bg-accent mt-2" style={{ animation: 'blink 1s step-end infinite' }} />
+        <span className="inline-block w-2 h-4 bg-accent mt-2" style={{ animation: 'blink 1s step-end infinite' }} aria-hidden="true" />
       </div>
     </section>
   );

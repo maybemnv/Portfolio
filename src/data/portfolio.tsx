@@ -1,6 +1,6 @@
 import { PortfolioData } from '../types/portfolio';
-import { FaPython, FaJava, FaHtml5, FaJs, FaDatabase, FaTerminal, FaDocker, FaGitAlt, FaLinkedin, FaGithub, FaDiscord, FaEnvelope, FaAws, FaRProject } from 'react-icons/fa';
-import { SiFastapi, SiStreamlit, SiFlask, SiTensorflow, SiPytorch, SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiJupyter, SiPostman, SiX, SiScikitlearn, SiKeras, SiOpencv, SiHuggingface, SiPandas, SiNumpy, SiPlotly, SiMlflow, SiGnubash, SiReact, SiTailwindcss, SiGooglecloud, SiVercel, SiRailway, SiRender, SiRedis, SiSqlite, SiNvidia } from 'react-icons/si';
+import { FaPython, FaJava, FaJs, FaDatabase, FaTerminal, FaDocker, FaGitAlt, FaLinkedin, FaGithub, FaDiscord, FaEnvelope, FaAws, FaRProject, FaCode } from 'react-icons/fa';
+import { SiFastapi, SiStreamlit, SiFlask, SiTensorflow, SiPytorch, SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiX, SiScikitlearn, SiHuggingface, SiPandas, SiNumpy, SiMlflow, SiGnubash, SiGooglecloud, SiVercel, SiRailway, SiRender, SiRedis, SiSqlite } from 'react-icons/si';
 import { BiNetworkChart, BiLogoCPlusPlus } from 'react-icons/bi';
 
 export const portfolioData: PortfolioData = {
@@ -9,6 +9,8 @@ export const portfolioData: PortfolioData = {
     title: "Data Scientist | AI Engineer",
     email: "maybemnv@gmail.com",
     location: "Delhi, India",
+    resumeUrl: "https://drive.google.com/file/d/1bkbVDHwq3ZYYU3J0oz3v4kBP3o4bPr90/view",
+    githubUsername: "maybemnv",
     social: [
       { name: "Email", icon: <FaEnvelope />, link: "mailto:maybemnv@gmail.com" },
       { name: "GitHub", icon: <FaGithub />, link: "https://github.com/maybemnv" },
@@ -84,7 +86,7 @@ export const portfolioData: PortfolioData = {
     "Languages": [
       { name: "Python", icon: <FaPython /> },
       { name: "Java", icon: <FaJava /> },
-      { name: "C", icon: <BiLogoCPlusPlus /> },
+      { name: "C/C++", icon: <BiLogoCPlusPlus /> },
       { name: "R", icon: <FaRProject /> },
       { name: "JavaScript", icon: <FaJs /> },
       { name: "SQL", icon: <FaDatabase /> },
@@ -101,7 +103,7 @@ export const portfolioData: PortfolioData = {
       { name: "FastAPI", icon: <SiFastapi /> },
       { name: "Flask", icon: <SiFlask /> },
       { name: "Streamlit", icon: <SiStreamlit /> },
-      { name: "LM Studio", icon: <SiNvidia /> },
+      { name: "LM Studio", icon: <FaCode /> },
       { name: "Auto-gen", icon: <FaTerminal /> }
     ],
     "Cloud & DevOps": [
@@ -125,6 +127,13 @@ export const portfolioData: PortfolioData = {
       { name: "FAISS", icon: <FaDatabase /> }
     ]
   },
+  featureImportance: [
+    { label: "Python", value: 0.95 },
+    { label: "Machine Learning", value: 0.90 },
+    { label: "Data Analysis", value: 0.85 },
+    { label: "React/Frontend", value: 0.75 },
+    { label: "Backend/API", value: 0.80 }
+  ],
   experience: [
     {
       role: "Research Intern",
