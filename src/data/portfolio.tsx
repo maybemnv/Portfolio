@@ -38,13 +38,17 @@ import {
   SiRender,
   SiRedis,
   SiSqlite,
+  SiSupabase,
+  SiNextdotjs,
+  SiTypescript,
+  SiCelery,
 } from "react-icons/si";
 import { BiNetworkChart, BiLogoCPlusPlus } from "react-icons/bi";
 
 export const portfolioData: PortfolioData = {
   personalInfo: {
     name: "Manav Kaushal",
-    title: "Data Scientist | AI Engineer",
+    title: "Backend Engineer | AI Systems",
     email: "maybemnv@gmail.com",
     location: "Delhi, India",
     resumeUrl:
@@ -74,72 +78,63 @@ export const portfolioData: PortfolioData = {
       },
     ],
     about: [
-      "I engineer intelligence from data. As a Data Scientist and AI practitioner, I don't just train models; I build scalable, deployable AI systems that solve real-world problems.",
-      "My stack isn't just Python—it's the entire MLOps lifecycle. From raw data ingestion to model monitoring in production, I thrive in the chaos of high-dimensional vectors and complex neural architectures.",
-      "Currently obsessed with LLMs, Agentic Workflows, and making computers 'see' better than humans.",
+      "I build backend infrastructure for AI systems — the kind that actually ships to production. FastAPI services, agentic pipelines, multi-tenant platforms, and the plumbing that holds them together at scale.",
+      "My stack runs deep: LangGraph for orchestration, Supabase and PostgreSQL for data, Redis and Celery for async workloads, Docker for deployment. I care about observability, security, and systems that don't fall apart under pressure.",
+      "Currently focused on agentic workflows, NL-to-SQL pipelines, and platform engineering for AI-native products.",
     ],
   },
   projects: [
     {
+      name: "DataLens AI",
+      timeline: "04/2025",
+      description:
+        "LangGraph ReAct agent for natural language analytics. Users query structured data in plain English; the agent plans, executes, and self-corrects SQL queries against a live database — returning charts, summaries, and drill-down insights without touching a dashboard.",
+      github: "https://github.com/maybemnv/DataLens-AI",
+      demo: null,
+      tags: ["LangGraph", "ReAct", "FastAPI", "NL-to-SQL"],
+    },
+    {
       name: "Synthex",
       timeline: "05/2025",
       description:
-        "Architected an AI-powered educational assistant using RAG (Retrieval-Augmented Generation). Implemented custom prompt chains to deconstruct complex codebases into digestible learning modules.",
+        "AI-powered educational assistant using RAG (Retrieval-Augmented Generation). Implements custom prompt chains to deconstruct complex codebases into digestible learning modules — built for developers who learn by reading source, not docs.",
       github: "https://github.com/maybemnv/Synthex",
       demo: "https://maybemnv-synthex-app-lupceq.streamlit.app/",
       tags: ["FastAPI", "LangChain", "RAG", "Streamlit"],
     },
     {
-      name: "LegalDocs",
-      timeline: "12/2024",
-      description:
-        "Designed and deployed a generative AI prototype integrating Gemini APIs with RAG (Cohere embeddings) to enable scalable document analysis using FastAPI, LangChain, and React.",
-      github: "https://github.com/maybemnv/LegalDocs",
-      demo: "https://legal-docs-livid.vercel.app/",
-      tags: ["FastAPI", "Gemini API", "RAG", "React"],
-    },
-    {
-      name: "State Budget Analysis",
-      timeline: "11/2024",
-      description:
-        "Developed an automated ETL pipeline for state budget analysis, performing data cleaning, schema transformation, and reporting to improve accessibility and policy insights.",
-      github: "https://github.com/maybemnv/State-Budget-Analysis",
-      demo: "https://maybemnv-state-budget-analysis-app-26tzub.streamlit.app/",
-      tags: ["ETL", "Data Engineering", "Streamlit", "Python"],
-    },
-    {
-      name: "Cover Letter & Resume Gen",
-      timeline: "10/2024",
-      description:
-        "An intelligent tool for generating tailored cover letters and resumes. Optimizes content for ATS systems using advanced language models to increase interview chances.",
-      github: "https://github.com/maybemnv/Cover-Letter-Generator",
-      demo: "https://cover-letter-and-tailored-resume.onrender.com/",
-      tags: ["GenAI", "NLP", "Resume Builder", "Python"],
-    },
-    {
-      name: "Epidemiology AI",
-      timeline: "02/2025",
-      description:
-        "AI-powered disease outbreak early warning system that fuses health clinic reports, pharmacy sales spikes, social media trends, and climate data. Uses time-series anomaly detection to predict outbreak probability before traditional surveillance catches up.",
-      github: "https://github.com/maybemnv/Epidemiology-AI",
-      demo: null,
-      tags: ["Time-Series", "Anomaly Detection", "Public Health", "Python"],
-    },
-    {
       name: "AI Patrolling & Bandobast System",
       timeline: "01/2025",
       description:
-        "Computer vision and NLP surveillance intelligence platform for police operations. Combines YOLOv8n object detection (31ms inference), crowd density analysis, anomaly detection, and a RAG pipeline with FAISS vector store — all served via a FastAPI backend and a React command center dashboard.",
+        "Computer vision and NLP surveillance intelligence platform for police operations. YOLOv8n object detection at 31ms inference, crowd density analysis, anomaly detection, and a RAG pipeline with FAISS vector store — served via FastAPI with a React command center dashboard.",
       github:
         "https://github.com/maybemnv/AI-Driven-Patrolling-and-Bandobast-Intelligence-System",
       demo: null,
       tags: ["YOLOv8", "RAG", "FastAPI", "Computer Vision"],
     },
     {
+      name: "Epidemiology AI",
+      timeline: "02/2025",
+      description:
+        "Disease outbreak early warning system that fuses health clinic reports, pharmacy sales spikes, social media trends, and climate data. Time-series anomaly detection flags outbreak probability before traditional surveillance catches up.",
+      github: "https://github.com/maybemnv/Epidemiology-AI",
+      demo: null,
+      tags: ["Time-Series", "Anomaly Detection", "Public Health", "Python"],
+    },
+    {
+      name: "LegalDocs",
+      timeline: "12/2024",
+      description:
+        "Generative AI prototype integrating Gemini APIs with RAG (Cohere embeddings) for scalable legal document analysis. FastAPI backend, LangChain orchestration, React frontend — deployed and publicly accessible.",
+      github: "https://github.com/maybemnv/LegalDocs",
+      demo: "https://legal-docs-livid.vercel.app/",
+      tags: ["FastAPI", "Gemini API", "RAG", "React"],
+    },
+    {
       name: "APS-Failure Prediction",
       timeline: "12/2024",
       description:
-        "Developed a predictive maintenance system for heavy-duty vehicle air pressure systems. Achieved 98% recall using XGBoost and SMOTE for handling extreme class imbalance.",
+        "Predictive maintenance system for heavy-duty vehicle air pressure systems. 98% recall using XGBoost and SMOTE to handle extreme class imbalance — the cost of a false negative here is a breakdown on the highway.",
       github:
         "https://github.com/maybemnv/predictive-maintenance-for-air-pressure-system-aps",
       demo: null,
@@ -149,56 +144,65 @@ export const portfolioData: PortfolioData = {
   skills: {
     Languages: [
       { name: "Python", icon: <FaPython /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
+      { name: "JavaScript", icon: <FaJs /> },
+      { name: "SQL", icon: <FaDatabase /> },
       { name: "Java", icon: <FaJava /> },
       { name: "C/C++", icon: <BiLogoCPlusPlus /> },
       { name: "R", icon: <FaRProject /> },
-      { name: "JavaScript", icon: <FaJs /> },
-      { name: "SQL", icon: <FaDatabase /> },
       { name: "Bash", icon: <SiGnubash /> },
     ],
     "Frameworks & Libraries": [
+      { name: "FastAPI", icon: <SiFastapi /> },
+      { name: "LangGraph", icon: <BiNetworkChart /> },
+      { name: "LangChain", icon: <BiNetworkChart /> },
+      { name: "Next.js", icon: <SiNextdotjs /> },
+      { name: "Celery", icon: <SiCelery /> },
       { name: "TensorFlow", icon: <SiTensorflow /> },
       { name: "PyTorch", icon: <SiPytorch /> },
       { name: "Scikit-learn", icon: <SiScikitlearn /> },
-      { name: "LangChain", icon: <BiNetworkChart /> },
       { name: "Hugging Face", icon: <SiHuggingface /> },
       { name: "Pandas", icon: <SiPandas /> },
       { name: "NumPy", icon: <SiNumpy /> },
-      { name: "FastAPI", icon: <SiFastapi /> },
       { name: "Flask", icon: <SiFlask /> },
       { name: "Streamlit", icon: <SiStreamlit /> },
-      { name: "LM Studio", icon: <FaCode /> },
-      { name: "Auto-gen", icon: <FaTerminal /> },
     ],
     "Cloud & DevOps": [
       { name: "AWS", icon: <FaAws /> },
       { name: "GCP", icon: <SiGooglecloud /> },
       { name: "Docker", icon: <FaDocker /> },
+      { name: "Git", icon: <FaGitAlt /> },
+      { name: "MLflow", icon: <SiMlflow /> },
       { name: "Vercel", icon: <SiVercel /> },
       { name: "Render", icon: <SiRender /> },
       { name: "Railway", icon: <SiRailway /> },
-      { name: "MLflow", icon: <SiMlflow /> },
-      { name: "Git", icon: <FaGitAlt /> },
     ],
     Databases: [
       { name: "PostgreSQL", icon: <SiPostgresql /> },
+      { name: "Supabase", icon: <SiSupabase /> },
+      { name: "Redis", icon: <SiRedis /> },
       { name: "MongoDB", icon: <SiMongodb /> },
       { name: "MySQL", icon: <SiMysql /> },
-      { name: "Redis", icon: <SiRedis /> },
       { name: "SQLite", icon: <SiSqlite /> },
       { name: "Firebase", icon: <SiFirebase /> },
-      { name: "Pinecone", icon: <FaDatabase /> },
       { name: "FAISS", icon: <FaDatabase /> },
+      { name: "Pinecone", icon: <FaDatabase /> },
     ],
   },
   featureImportance: [
     { label: "Python", value: 0.95 },
-    { label: "Machine Learning", value: 0.9 },
-    { label: "Data Analysis", value: 0.85 },
-    { label: "React/Frontend", value: 0.75 },
-    { label: "Backend/API", value: 0.8 },
+    { label: "Backend / APIs", value: 0.92 },
+    { label: "Agentic Systems", value: 0.88 },
+    { label: "Machine Learning", value: 0.82 },
+    { label: "React / Frontend", value: 0.7 },
   ],
   experience: [
+    {
+      role: "AI/Backend Engineer",
+      company: "Analytics Depot",
+      timeline: "05/2026 – Present",
+      logo: "https://analyticsdepot.com/logo-light.png",
+    },
     {
       role: "Research Intern",
       company: "GVF",
