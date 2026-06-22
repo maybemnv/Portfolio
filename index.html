@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>root@manav:~$</title>
+<meta name="description" content="Manav Kaushal — Backend Engineer | AI Systems" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Crect%20width='16'%20height='16'%20fill='%23ff3c00'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --fg:#e8e8e8;
+    --accent:#ff3c00;
+    --muted:#444444;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+    font-size:15px;
+    line-height:1.55;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* CRT scanline overlay — subtle, never blocks clicks or readability */
+  .scanlines{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      #000 0px,
+      #000 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    opacity:0.03;
+  }
+
+  #terminal{
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    height:100dvh;
+    max-width:1040px;
+    margin:0 auto;
+    padding:20px 20px 14px;
+  }
+
+  #output{
+    flex:1 1 auto;
+    overflow-y:auto;
+    overflow-x:hidden;
+    white-space:pre-wrap;
+    word-break:break-word;
+    padding-right:6px;
+  }
+  #output > div{ margin:0; }
+  .block{ margin:2px 0 12px; }
+
+  #output::-webkit-scrollbar{ width:8px; }
+  #output::-webkit-scrollbar-track{ background:transparent; }
+  #output::-webkit-scrollbar-thumb{ background:#1c1c1c; border-radius:0; }
+
+  .accent{ color:var(--accent); }
+  .dim{ color:var(--muted); }
+
+  .ascii{
+    color:var(--accent);
+    white-space:pre;
+    line-height:1.05;
+    font-weight:700;
+    margin:8px 0 10px;
+    text-shadow:0 0 9px rgba(255,60,0,0.45);
+    overflow-x:auto;
+  }
+
+  #output a{
+    color:var(--fg);
+    text-decoration:underline;
+    text-underline-offset:2px;
+    text-decoration-color:#333;
+  }
+  #output a:hover{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+
+  /* Quick-nav pills — pinned above input, dim tag chips */
+  #pills{
+    display:none;
+    flex-wrap:wrap;
+    gap:8px;
+    flex:0 0 auto;
+    padding:10px 0 12px;
+    border-top:1px solid #161616;
+    margin-top:8px;
+  }
+  .pill{
+    font-family:inherit;
+    font-size:12px;
+    line-height:1;
+    color:var(--muted);
+    background:transparent;
+    border:1px solid #222;
+    border-radius:2px;
+    padding:5px 8px;
+    cursor:pointer;
+    transition:color .15s ease, border-color .15s ease;
+    -webkit-appearance:none;
+  }
+  .pill::before{ content:'['; }
+  .pill::after{ content:']'; }
+  .pill:hover,
+  .pill:focus-visible{
+    color:var(--fg);
+    border-color:var(--accent);
+    outline:none;
+  }
+
+  /* Input line */
+  #inputLine{
+    display:none;
+    align-items:flex-start;
+    flex:0 0 auto;
+    position:relative;
+  }
+  .ps{ white-space:pre; }
+  #mirror{ white-space:pre-wrap; word-break:break-word; }
+  #cursor{
+    display:inline-block;
+    color:var(--fg);
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* Real input sits transparent on top of the line to capture typing/focus */
+  #cmdInput{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:transparent;
+    caret-color:transparent;
+    font:inherit;
+    padding:0;
+    margin:0;
+    resize:none;
+  }
+
+  @media (max-width:600px){
+    body{ font-size:12px; }
+    #terminal{ padding:14px 13px 10px; }
+    .pill{ font-size:11px; }
+    .ascii{ text-shadow:0 0 6px rgba(255,60,0,0.45); }
+  }
+</style>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div id="terminal">
+    <div id="output" aria-live="polite"></div>
+
+    <div id="pills">
+      <button class="pill" data-cmd="whoami">whoami</button>
+      <button class="pill" data-cmd="ls projects/">ls projects/</button>
+      <button class="pill" data-cmd="skills">skills</button>
+      <button class="pill" data-cmd="exp">exp</button>
+      <button class="pill" data-cmd="contact">contact</button>
+    </div>
+
+    <div id="inputLine">
+      <span class="ps"><span class="accent">root@manav</span>:<span id="promptPath">~</span>$ </span><span id="mirror"></span><span id="cursor">&#9608;</span>
+      <input id="cmdInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" />
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- DOM refs ---------- */
+  var output   = document.getElementById('output');
+  var pills     = document.getElementById('pills');
+  var inputLine = document.getElementById('inputLine');
+  var cmdInput  = document.getElementById('cmdInput');
+  var mirror    = document.getElementById('mirror');
+
+  /* ---------- state ---------- */
+  var booted = false;
+  var busy   = false;
+  var commandHistory = [];
+  var histIndex = 0;
+  var cwd = '~';
+  var prevCwd = '~';
+  var bootTime = Date.now();
+
+  function promptStr(){
+    return '<span class="accent">root@manav</span>:' + escapeHtml(cwd) + '$ ';
+  }
+  function updatePromptPath(){
+    document.getElementById('promptPath').textContent = cwd;
+  }
+
+  /* ---------- data ---------- */
+  var projects = [
+    {
+      slug:'datalens-ai', dir:'DataLens-AI/', name:'DataLens AI', date:'04/2025',
+      short:'LangGraph ReAct NL-to-SQL agent',
+      tags:'LangGraph \u00b7 ReAct \u00b7 FastAPI \u00b7 NL-to-SQL \u00b7 PostgreSQL',
+      desc:[
+        'LangGraph ReAct agent \u2014 users query structured data in plain English.',
+        'Agent plans, executes, and self-corrects SQL against a live DB.',
+        'Returns charts, summaries, drill-down insights. No dashboard needed.'
+      ],
+      repo:'https://github.com/maybemnv/DataLens-AI', demo:''
+    },
+    {
+      slug:'synthex', dir:'Synthex/', name:'Synthex', date:'05/2025',
+      short:'RAG-powered codebase learning assistant',
+      tags:'FastAPI \u00b7 LangChain \u00b7 RAG \u00b7 Streamlit',
+      desc:[
+        'AI educational assistant that deconstructs complex codebases into',
+        'digestible learning modules via custom RAG prompt chains.',
+        'Built for devs who learn by reading source, not docs.'
+      ],
+      repo:'https://github.com/maybemnv/Synthex',
+      demo:'https://maybemnv-synthex-app-lupceq.streamlit.app/'
+    },
+    {
+      slug:'grabpic', dir:'GrabPic/', name:'GrabPic', date:'06/2026',
+      short:'Facial-recognition event photo delivery',
+      tags:'FastAPI \u00b7 Computer Vision \u00b7 Facial Recognition \u00b7 Python',
+      desc:[
+        'Organizers upload event photos once. Attendees take a selfie,',
+        'get a personalized gallery back in under 5 seconds.'
+      ],
+      repo:'https://github.com/maybemnv/GrabPic', demo:''
+    },
+    {
+      slug:'ai-patrolling', dir:'AI-Patrolling/', name:'AI-Patrolling', date:'01/2025',
+      short:'YOLOv8 + RAG surveillance platform',
+      tags:'YOLOv8 \u00b7 RAG \u00b7 FastAPI \u00b7 FAISS \u00b7 React \u00b7 Computer Vision',
+      desc:[
+        'Surveillance intelligence for police ops. YOLOv8n at 31ms inference,',
+        'crowd density analysis, anomaly detection, FAISS RAG pipeline.',
+        'React command center dashboard, FastAPI backend.'
+      ],
+      repo:'https://github.com/maybemnv/AI-Driven-Patrolling-and-Bandobast-Intelligence-System', demo:''
+    },
+    {
+      slug:'legaldocs', dir:'LegalDocs/', name:'LegalDocs', date:'12/2024',
+      short:'Gemini + RAG document analysis',
+      tags:'FastAPI \u00b7 Gemini API \u00b7 RAG \u00b7 Cohere \u00b7 LangChain \u00b7 React',
+      desc:[
+        'GenAI prototype for scalable legal document analysis.',
+        'Gemini APIs + Cohere embeddings RAG pipeline. Publicly deployed.'
+      ],
+      repo:'https://github.com/maybemnv/LegalDocs',
+      demo:'https://legal-docs-livid.vercel.app/'
+    },
+    {
+      slug:'aps-failure', dir:'APS-Failure/', name:'APS-Failure', date:'12/2024',
+      short:'XGBoost predictive maintenance (98% recall)',
+      tags:'XGBoost \u00b7 Scikit-learn \u00b7 SMOTE \u00b7 Imbalanced Learning',
+      desc:[
+        'Predictive maintenance for heavy-duty vehicle air pressure systems.',
+        '98% recall. SMOTE for extreme class imbalance.',
+        'A false negative here = breakdown on the highway.'
+      ],
+      repo:'https://github.com/maybemnv/predictive-maintenance-for-air-pressure-system-aps', demo:''
+    },
+    {
+      slug:'epidemiology-ai', dir:'Epidemiology-AI/', name:'Epidemiology-AI', date:'02/2025',
+      short:'Time-series outbreak early warning system',
+      tags:'Time-Series \u00b7 Anomaly Detection \u00b7 Python \u00b7 Public Health',
+      desc:[
+        'Outbreak early warning system fusing clinic reports, pharmacy spikes,',
+        'social media trends, and climate data. Flags risk before',
+        'traditional surveillance catches up.'
+      ],
+      repo:'https://github.com/maybemnv/Epidemiology-AI', demo:''
+    },
+    {
+      slug:'cover-letter-gen', dir:'Cover-Letter-Gen/', name:'Cover-Letter-Gen', date:'10/2024',
+      short:'ATS-optimized resume + cover letter gen',
+      tags:'GenAI \u00b7 NLP \u00b7 Python \u00b7 LLM',
+      desc:[
+        'ATS-optimized resume + cover letter generator using LLMs.',
+        'Built during a long job hunt. Then made it public.'
+      ],
+      repo:'https://github.com/maybemnv/Cover-Letter-Generator',
+      demo:'https://cover-letter-and-tailored-resume.onrender.com/'
+    }
+  ];
+
+  var skillGroups = [
+    ['LANGUAGES',  ['Python \u00b7 TypeScript \u00b7 JavaScript \u00b7 SQL \u00b7 Java \u00b7 C/C++ \u00b7 R \u00b7 Bash']],
+    ['FRAMEWORKS', ['FastAPI \u00b7 LangGraph \u00b7 LangChain \u00b7 Next.js \u00b7 Celery \u00b7 TensorFlow',
+                    'PyTorch \u00b7 Scikit-learn \u00b7 HuggingFace \u00b7 Pandas \u00b7 NumPy \u00b7 Flask \u00b7 Streamlit']],
+    ['CLOUD/DEVOPS',['AWS \u00b7 GCP \u00b7 Docker \u00b7 Git \u00b7 MLflow \u00b7 Vercel \u00b7 Render \u00b7 Railway']],
+    ['DATABASES',  ['PostgreSQL \u00b7 Supabase \u00b7 Redis \u00b7 MongoDB \u00b7 MySQL \u00b7 SQLite \u00b7 FAISS \u00b7 Pinecone']]
+  ];
+
+  var contacts = [
+    ['email',    'maybemnv@gmail.com',                               'mailto:maybemnv@gmail.com'],
+    ['github',   'https://github.com/maybemnv',                       null],
+    ['linkedin', 'https://www.linkedin.com/in/maybmnv/',              null],
+    ['x',        'https://x.com/maybemnv',                            null],
+    ['discord',  'https://discord.com/users/751306489574195230',      null],
+    ['resume',   'https://drive.google.com/file/d/1bkbVDHwq3ZYYU3J0oz3v4kBP3o4bPr90/view', null]
+  ];
+
+  var helpItems = [
+    ['whoami',       'who i am, what i build'],
+    ['ls projects/', 'list every project'],
+    ['cat <name>',   'open a project (fuzzy name ok)'],
+    ['skills',       'the stack, by category'],
+    ['exp',          'experience + education'],
+    ['contact',      'every way to reach me'],
+    ['cd <dir>',     'change directory (thematic)'],
+    ['pwd',          'print working directory'],
+    ['date',         'show current date & time'],
+    ['history',      'show recent command history'],
+    ['echo <text>',  'repeat text back at you'],
+    ['uptime',       'how long this session has lived'],
+    ['uname',        'system info (spoiler: it\'s me)'],
+    ['sudo <cmd>',   'try it. i dare you.'],
+    ['clear',        'wipe the screen'],
+    ['help',         "you're looking at it"],
+    ['exit',         '...']
+  ];
+
+  var ASCII = [
+    "\u2588\u2588\u2588\u2557   \u2588\u2588\u2588\u2557\u2588\u2588\u2557  \u2588\u2588\u2557",
+    "\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2551 \u2588\u2588\u2554\u255d",
+    "\u2588\u2588\u2554\u2588\u2588\u2588\u2588\u2554\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2554\u255d ",
+    "\u2588\u2588\u2551\u255a\u2588\u2588\u2554\u255d\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2588\u2588\u2557 ",
+    "\u2588\u2588\u2551 \u255a\u2550\u255d \u2588\u2588\u2551\u2588\u2588\u2551  \u2588\u2588\u2557",
+    "\u255a\u2550\u255d     \u255a\u2550\u255d\u255a\u2550\u255d  \u255a\u2550\u255d"
+  ].join("\n");
+
+  /* ---------- helpers ---------- */
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+  function scrollBottom(){ output.scrollTop = output.scrollHeight; }
+
+  function escapeHtml(s){
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  function norm(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g,''); }
+
+  function aLink(url, label){
+    var text = label || url;
+    return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + text + '</a>';
+  }
+
+  function focusInput(){
+    if (!booted) return;
+    cmdInput.focus({ preventScroll:true });
+  }
+
+  function setMirror(v){ mirror.textContent = v; }
+
+  function setVal(v){
+    cmdInput.value = v;
+    setMirror(v);
+    requestAnimationFrame(function(){
+      try { cmdInput.setSelectionRange(v.length, v.length); } catch(e){}
+    });
+  }
+
+  function printHTML(html, cls){
+    var d = document.createElement('div');
+    if (cls) d.className = cls;
+    d.innerHTML = html;
+    output.appendChild(d);
+    scrollBottom();
+    return d;
+  }
+
+  function printBlock(html){ return printHTML(html, 'block'); }
+
+  function printAscii(){
+    var d = document.createElement('div');
+    d.className = 'ascii';
+    d.textContent = ASCII;
+    output.appendChild(d);
+    scrollBottom();
+  }
+
+  function padEnd(s, n){
+    s = String(s);
+    while (s.length < n) s += ' ';
+    return s;
+  }
+
+  function commonPrefix(arr){
+    if (!arr.length) return '';
+    var p = arr[0];
+    for (var i=1;i<arr.length;i++){
+      while (arr[i].indexOf(p) !== 0){
+        p = p.slice(0, -1);
+        if (!p) return '';
+      }
+    }
+    return p;
+  }
+
+  /* ---------- fuzzy project match ---------- */
+  function findProject(q){
+    var n = norm(q);
+    if (!n) return null;
+    var i, p;
+    for (i=0;i<projects.length;i++){ p=projects[i];
+      if (norm(p.slug)===n || norm(p.name)===n || norm(p.dir)===n) return p; }
+    for (i=0;i<projects.length;i++){ p=projects[i];
+      if (norm(p.slug).indexOf(n)===0 || norm(p.name).indexOf(n)===0) return p; }
+    for (i=0;i<projects.length;i++){ p=projects[i];
+      if (norm(p.slug).indexOf(n)>-1 || norm(p.name).indexOf(n)>-1) return p; }
+    return null;
+  }
+
+  /* ---------- command output builders ---------- */
+  function helpHTML(){
+    var lines = ['<span class="accent">available commands</span>', ''];
+    for (var i=0;i<helpItems.length;i++){
+      lines.push('  ' + padEnd(helpItems[i][0], 16) + '<span class="dim">' + helpItems[i][1] + '</span>');
+    }
+    return lines.join('\n');
+  }
+
+  function whoamiHTML(){
+    return [
+      '<span class="dim">Name:</span>     Manav Kaushal',
+      '<span class="dim">Role:</span>     Backend Engineer | AI Systems',
+      '<span class="dim">Location:</span> Delhi, India',
+      '<span class="dim">Stack:</span>    FastAPI \u00b7 LangGraph \u00b7 PostgreSQL \u00b7 Redis \u00b7 Celery \u00b7 Docker \u00b7 Next.js \u00b7 Supabase',
+      '',
+      'I build backend infrastructure for AI systems \u2014 the kind that actually ships.',
+      'Agentic pipelines, multi-tenant platforms, NL-to-SQL engines, async workloads.',
+      "I care about observability, security, and systems that don't break under pressure.",
+      '',
+      '<span class="dim">Currently:</span> contract backend eng @ Analytics Depot (AI analytics startup, NYC-aligned)',
+      '<span class="dim">Open to:</span>   full-time backend/platform roles in AI-native products'
+    ].join('\n');
+  }
+
+  function lsHTML(){
+    var lines = [];
+    for (var i=0;i<projects.length;i++){
+      var p = projects[i];
+      lines.push(
+        '<span class="dim">drwxr-xr-x</span>  ' +
+        padEnd(p.dir, 20) +
+        '<span class="dim">' + p.date + '</span>   ' +
+        p.short
+      );
+    }
+    lines.push('');
+    lines.push('<span class="dim">run \'cat &lt;name&gt;\' for full details</span>');
+    return lines.join('\n');
+  }
+
+  function catHTML(p){
+    var lines = [];
+    lines.push('<span class="dim">PROJECT:</span> <span class="accent">' + escapeHtml(p.name) + '</span>');
+    lines.push('<span class="dim">DATE:</span> ' + p.date);
+    lines.push('<span class="dim">TAGS:</span> ' + p.tags);
+    for (var i=0;i<p.desc.length;i++){
+      lines.push((i===0 ? '<span class="dim">DESC:</span> ' : '      ') + escapeHtml(p.desc[i]));
+    }
+    lines.push('<span class="dim">REPO:</span> ' + (p.repo ? aLink(p.repo) : '\u2014'));
+    lines.push('<span class="dim">DEMO:</span> ' + (p.demo ? aLink(p.demo) : '\u2014'));
+    return lines.join('\n');
+  }
+
+  function skillsHTML(){
+    var lines = [];
+    for (var i=0;i<skillGroups.length;i++){
+      var cat = skillGroups[i][0];
+      var rows = skillGroups[i][1];
+      lines.push('<span class="accent">' + padEnd(cat, 13) + '</span>' + rows[0]);
+      for (var j=1;j<rows.length;j++){
+        lines.push(padEnd('', 13) + rows[j]);
+      }
+    }
+    return lines.join('\n');
+  }
+
+  function expHTML(){
+    return [
+      '<span class="accent">EXPERIENCE</span>',
+      '<span class="dim">\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500</span>',
+      '<span class="dim">[05/2026 \u2013 now]</span>  Contract Backend Engineer @ Analytics Depot',
+      '                 <span class="dim">AI analytics startup \u00b7 NYC-aligned \u00b7 bootstrapped</span>',
+      '                 <span class="dim">FastAPI \u00b7 LangGraph \u00b7 PostgreSQL \u00b7 multi-tenant SaaS</span>',
+      '',
+      '<span class="dim">[08/2024 \u2013 11/2024]</span>  Research Intern @ GVF',
+      '                     <span class="dim">RAG pipeline: Cohere \u00b7 FAISS \u00b7 FastAPI \u00b7 React/TS</span>',
+      '',
+      '<span class="accent">EDUCATION</span>',
+      '<span class="dim">\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500</span>',
+      '<span class="dim">[2022 \u2013 2025]</span>  BCA in Data Science',
+      '               <span class="dim">Jagannath Institute of Management and Science</span>'
+    ].join('\n');
+  }
+
+  function contactHTML(){
+    var lines = ['<span class="accent">reach me \u2192</span>', ''];
+    for (var i=0;i<contacts.length;i++){
+      var label = contacts[i][0];
+      var disp  = contacts[i][1];
+      var href  = contacts[i][2] || disp;
+      lines.push('  ' + padEnd(label, 10) + aLink(href, disp));
+    }
+    return lines.join('\n');
+  }
+
+  function exitHTML(){
+    return '<span class="dim">nice try \u2014 you don\'t get to exit me that easily. you live in the terminal now. (type \'help\')</span>';
+  }
+
+  function cdCmd(dir){
+    if (!dir || dir === '~') {
+      prevCwd = cwd; cwd = '~';
+    } else if (dir === '/') {
+      prevCwd = cwd; cwd = '/';
+    } else if (dir === '..') {
+      prevCwd = cwd;
+      if (cwd === '~' || cwd === '/') { /* stay put */ }
+      else {
+        var parts = cwd.split('/').filter(Boolean);
+        parts.pop();
+        cwd = parts.length ? '/' + parts.join('/') : '~';
+      }
+    } else if (dir === '-') {
+      var tmp = cwd; cwd = prevCwd; prevCwd = tmp;
+    } else if (dir === 'projects' || dir === 'projects/') {
+      prevCwd = cwd; cwd = '~/projects';
+    } else {
+      printHTML('<span class="dim">cd: ' + escapeHtml(dir) + ': No such directory</span>');
+      updatePromptPath();
+      return;
+    }
+    updatePromptPath();
+  }
+
+  function pwdHTML(){
+    return '<span class="dim">' + escapeHtml(cwd) + '</span>';
+  }
+
+  function dateHTML(){
+    var d = new Date();
+    return d.toString();
+  }
+
+  function historyHTML(){
+    var lines = [];
+    for (var i=0;i<commandHistory.length;i++){
+      lines.push('<span class="dim">' + (i+1) + '  </span>' + escapeHtml(commandHistory[i]));
+    }
+    return lines.join('\n') || '<span class="dim">(no commands yet)</span>';
+  }
+
+  function echoHTML(text){
+    return text || '';
+  }
+
+  function uptimeHTML(){
+    var seconds = Math.floor((Date.now() - bootTime) / 1000);
+    var mins = Math.floor(seconds / 60);
+    var hrs = Math.floor(mins / 60);
+    var days = Math.floor(hrs / 24);
+    var parts = [];
+    if (days) parts.push(days + 'd');
+    if (hrs % 24) parts.push((hrs % 24) + 'h');
+    if (mins % 60) parts.push((mins % 60) + 'm');
+    parts.push((seconds % 60) + 's');
+    return '<span class="dim">up</span> ' + parts.join(' ');
+  }
+
+  function unameHTML(){
+    return 'PortfolioOS <span class="dim">arm64</span> <span class="dim">kernel 6.2.0-rc1 (terminal edition)</span>';
+  }
+
+  function sudoHTML(cmd){
+    if (!cmd) return '<span class="accent">\u26a0</span> <span class="dim">sudo: what do you want me to run as root? nice try</span>';
+    if (cmd.indexOf('rm') === 0) return '<span class="dim">sudo: ' + escapeHtml(cmd) + ': permission denied. you almost deleted my entire existence.</span>';
+    return '<span class="dim">sudo: ' + escapeHtml(cmd) + ': permission denied. you\'re in a portfolio, not a terminal.</span>';
+  }
+
+  /* ---------- dispatch ---------- */
+  function run(raw){
+    var input = (raw == null ? '' : String(raw)).trim();
+
+    printHTML(promptStr() + escapeHtml(input));
+
+    if (input){
+      commandHistory.push(input);
+      if (commandHistory.length > 20) commandHistory.shift();
+    }
+    histIndex = commandHistory.length;
+
+    if (input === ''){ afterRun(); return; }
+
+    var parts = input.split(/\s+/);
+    var cmd = parts[0].toLowerCase();
+    var arg = input.slice(parts[0].length).trim();
+
+    switch (cmd){
+      case 'help':       printBlock(helpHTML()); break;
+      case 'whoami':     printBlock(whoamiHTML()); break;
+      case 'ls':         printBlock(lsHTML()); break;
+      case 'cat':        catCmd(arg); break;
+      case 'skills':     printBlock(skillsHTML()); break;
+      case 'exp':
+      case 'experience': printBlock(expHTML()); break;
+      case 'contact':    printBlock(contactHTML()); break;
+      case 'cd':         cdCmd(arg); break;
+      case 'pwd':        printBlock(pwdHTML()); break;
+      case 'date':       printBlock(dateHTML()); break;
+      case 'history':    printBlock(historyHTML()); break;
+      case 'echo':       printBlock(echoHTML(arg)); break;
+      case 'uptime':     printBlock(uptimeHTML()); break;
+      case 'uname':      printBlock(unameHTML()); break;
+      case 'sudo':       printBlock(sudoHTML(arg)); break;
+      case 'clear':      output.innerHTML = ''; break;
+      case 'exit':
+      case 'quit':       printBlock(exitHTML()); break;
+      default:
+        printHTML('command not found: ' + escapeHtml(parts[0]) +
+          ' <span class="dim">\u2014 type \'help\'</span>');
+    }
+    afterRun();
+  }
+
+  function catCmd(arg){
+    if (!arg){
+      printHTML('<span class="dim">usage: cat &lt;project&gt; \u2014 run \'ls projects/\' to list them</span>');
+      return;
+    }
+    var p = findProject(arg);
+    if (!p){
+      printHTML('cat: ' + escapeHtml(arg) +
+        ': <span class="dim">no such project \u2014 run \'ls projects/\'</span>');
+      return;
+    }
+    printBlock(catHTML(p));
+  }
+
+  function afterRun(){
+    scrollBottom();
+    focusInput();
+  }
+
+  /* ---------- input submit ---------- */
+  function submit(){
+    var v = cmdInput.value;
+    cmdInput.value = '';
+    setMirror('');
+    run(v);
+  }
+
+  /* ---------- autocomplete ---------- */
+  var COMMANDS = ['help','whoami','ls projects/','cat ','skills','exp','contact','cd ','pwd','date','history','echo ','uptime','uname','sudo ','clear','exit'];
+
+  var DIRS = ['~', '/', 'projects/', '..', '-'];
+
+  function autocomplete(){
+    var v = cmdInput.value;
+    var lower = v.toLowerCase();
+
+    /* cat <fragment> → project slugs */
+    if (lower.indexOf('cat ') === 0){
+      var frag = norm(v.slice(4));
+      var slugs = [];
+      for (var i=0;i<projects.length;i++){
+        var p = projects[i];
+        if (!frag || norm(p.slug).indexOf(frag) === 0 || norm(p.name).indexOf(frag) === 0){
+          slugs.push(p.slug);
+        }
+      }
+      if (slugs.length === 1){ setVal('cat ' + slugs[0]); }
+      else if (slugs.length > 1){
+        printHTML('<span class="dim">' + slugs.join('   ') + '</span>');
+        scrollBottom();
+      }
+      return;
+    }
+
+    /* cd <fragment> → directories */
+    if (lower.indexOf('cd ') === 0){
+      var dfrag = v.slice(3).trim();
+      var dmatches = [];
+      for (var d=0;d<DIRS.length;d++){
+        if (DIRS[d].indexOf(dfrag) === 0) dmatches.push(DIRS[d]);
+      }
+      if (dmatches.length === 1){ setVal('cd ' + dmatches[0]); }
+      else if (dmatches.length > 1){
+        printHTML('<span class="dim">' + dmatches.join('   ') + '</span>');
+        scrollBottom();
+      }
+      return;
+    }
+
+    /* general command completion */
+    var matches = [];
+    for (var k=0;k<COMMANDS.length;k++){
+      if (COMMANDS[k].indexOf(lower) === 0) matches.push(COMMANDS[k]);
+    }
+    if (matches.length === 1){ setVal(matches[0]); }
+    else if (matches.length > 1){
+      var hints = [];
+      for (var m=0;m<matches.length;m++) hints.push(matches[m].trim());
+      printHTML('<span class="dim">' + hints.join('   ') + '</span>');
+      var cp = commonPrefix(matches);
+      if (cp && cp.length > v.length) setVal(cp);
+      scrollBottom();
+    }
+  }
+
+  /* ---------- pill auto-type ---------- */
+  function autoType(cmd){
+    if (busy || !booted) return;
+    busy = true;
+    cmdInput.value = '';
+    setMirror('');
+    focusInput();
+    var i = 0;
+    (function step(){
+      if (i < cmd.length){
+        cmdInput.value += cmd.charAt(i);
+        setMirror(cmdInput.value);
+        i++;
+        setTimeout(step, 32);
+      } else {
+        setTimeout(function(){
+          var v = cmdInput.value;
+          cmdInput.value = '';
+          setMirror('');
+          run(v);
+          busy = false;
+        }, 140);
+      }
+    })();
+  }
+
+  /* ---------- events ---------- */
+  cmdInput.addEventListener('input', function(){
+    if (busy) return;
+    setMirror(cmdInput.value);
+  });
+
+  cmdInput.addEventListener('keydown', function(e){
+    if (busy){ e.preventDefault(); return; }
+
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      submit();
+    } else if (e.key === 'ArrowUp'){
+      e.preventDefault();
+      if (!commandHistory.length) return;
+      histIndex = Math.max(0, histIndex - 1);
+      setVal(commandHistory[histIndex]);
+    } else if (e.key === 'ArrowDown'){
+      e.preventDefault();
+      if (histIndex < commandHistory.length){
+        histIndex++;
+        setVal(histIndex === commandHistory.length ? '' : commandHistory[histIndex]);
+      }
+    } else if (e.key === 'Tab'){
+      e.preventDefault();
+      autocomplete();
+    }
+  });
+
+  var pillBtns = pills.querySelectorAll('.pill');
+  for (var b=0;b<pillBtns.length;b++){
+    pillBtns[b].addEventListener('click', function(){
+      autoType(this.getAttribute('data-cmd'));
+    });
+  }
+
+  // Keep focus on the input after any click in the terminal (but allow link
+  // clicks and text selection to work normally).
+  document.addEventListener('click', function(e){
+    if (!booted) return;
+    if (e.target && e.target.tagName === 'A') return;
+    var sel = window.getSelection ? String(window.getSelection()) : '';
+    if (sel) return;
+    focusInput();
+  });
+
+  /* ---------- boot sequence (~1.5s) ---------- */
+  var bootLines = [
+    'BIOS v2.6.0 ... OK',
+    'LOADING KERNEL ... OK',
+    'MOUNTING /home/manav ... OK'
+  ];
+
+  function typeLine(text){
+    return new Promise(function(resolve){
+      var line = document.createElement('div');
+      output.appendChild(line);
+      var i = 0;
+      (function tick(){
+        if (i <= text.length){
+          line.textContent = text.slice(0, i);
+          scrollBottom();
+          i++;
+          setTimeout(tick, 12);
+        } else {
+          resolve();
+        }
+      })();
+    });
+  }
+
+  async function boot(){
+    for (var i=0;i<bootLines.length;i++){
+      await typeLine(bootLines[i]);
+      await sleep(55);
+    }
+    await sleep(140);
+    printAscii();
+    await sleep(150);
+    printHTML(promptStr() + 'SYSTEM ONLINE');
+    printHTML(promptStr() + "type 'help' to get started");
+    await sleep(120);
+
+    booted = true;
+    pills.style.display = 'flex';
+    inputLine.style.display = 'flex';
+    focusInput();
+    scrollBottom();
+  }
+
+  // Wait for the webfont so the ASCII box-art lines up, but never hang on it.
+  function start(){ boot(); }
+  if (document.fonts && document.fonts.ready){
+    var started = false;
+    var go = function(){ if (started) return; started = true; start(); };
+    document.fonts.ready.then(go);
+    setTimeout(go, 1200);
+  } else {
+    start();
+  }
+})();
+</script>
+</body>
+</html>
